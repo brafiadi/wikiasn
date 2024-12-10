@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 	title: "WikiASN",
 	description: "Ensiklopedia Aparatur Sipil Negara",
 	icons: {
-		icon: '/favicon-96x96.png'
-	}
+		icon: "/favicon-96x96.png",
+	},
 };
 
 export default function RootLayout({
