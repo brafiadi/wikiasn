@@ -3,24 +3,27 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Search } from "lucide-react";
+import { CircleUserRound, Search } from "lucide-react";
 
 export default function WikiAsnHomepage() {
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
 			<div className="container mx-auto px-4">
-				<nav className="flex justify-end gap-4 py-4 text-sm">
+				<nav className="flex justify-end gap-8 py-4 text-sm align-middle">
 					{/* <select className="bg-transparent">
 						<option>Choose Language</option>
 						<option>English</option>
 						<option>Español</option>
 						<option>Français</option>
 					</select> */}
-					<Link href="#" className="text-gray-600 hover:text-gray-900">
-						Kontributor
+					{/* <Link href="#" className="text-gray-600 hover:text-gray-900">
+						Libur Nasional
 					</Link>
 					<Link href="#" className="text-gray-600 hover:text-gray-900">
-						Login
+						Peraturan
+					</Link> */}
+					<Link href="#" className="text-gray-400 hover:text-gray-700">
+						<CircleUserRound />
 					</Link>
 				</nav>
 
@@ -62,33 +65,41 @@ export default function WikiAsnHomepage() {
 							</Button>
 						</div>
 
-						<Card className="w-full max-w-2xl p-4 mt-8">
-							<div className="flex gap-4">
-								<Image
-									src="/placeholder.svg?height=80&width=80"
-									alt="Featured Article Image"
-									width={80}
-									height={80}
-									className="rounded-lg"
-								/>
-								<div>
-									<h2 className="font-medium mb-2">
-										From today's featured article
-									</h2>
-									<p className="text-sm text-gray-600 mb-2">
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-										diam magna, efficitur in felis sed, eleifend tempor velit
-										sed diam...
-									</p>
-									<Link
-										href="#"
-										className="text-sm text-blue-600 hover:underline"
-									>
-										Read more...
-									</Link>
+						<Link href="/hari-libur">
+							<Card className="w-full max-w-2xl p-4 mt-8">
+								<div className="flex gap-4">
+									<div>
+										<h2 className="font-medium mb-2">
+											Hari Libur
+										</h2>
+										<p className="text-sm text-gray-600 mb-2">
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+											Sed diam magna, efficitur in felis sed, eleifend tempor
+											velit sed diam...
+										</p>
+										
+									</div>
 								</div>
-							</div>
-						</Card>
+							</Card>
+						</Link>
+
+						<Link href="#">
+							<Card className="w-full max-w-2xl p-4 mt-8">
+								<div className="flex gap-4">
+									<div>
+										<h2 className="font-medium mb-2">
+											From today's featured article
+										</h2>
+										<p className="text-sm text-gray-600 mb-2">
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+											Sed diam magna, efficitur in felis sed, eleifend tempor
+											velit sed diam...
+										</p>
+										
+									</div>
+								</div>
+							</Card>
+						</Link>
 					</div>
 				</main>
 			</div>
