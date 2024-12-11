@@ -5,10 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { CircleUserRound, Search } from "lucide-react";
 
+const apiUrl = process.env.API_URL;
+
 const getData = async () => {
-	const res = await fetch(
-		"https://app.brafiadi.space/api/wikiasn/master-data/menu",
-	);
+	const res = await fetch(`${apiUrl}/master-data/menu`);
 	const data = await res.json();
 	return data.data;
 };
@@ -26,7 +26,7 @@ export default async function WikiAsnHomepage() {
 	if (!data) {
 		return <div>Loading...</div>;
 	}
-	console.log(data);
+	// console.log(data);
 
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
@@ -40,11 +40,11 @@ export default async function WikiAsnHomepage() {
 					</select> */}
 					{/* <Link href="#" className="text-gray-600 hover:text-gray-900">
 						Libur Nasional
-					</Link>
-					<Link href="#" className="text-gray-600 hover:text-gray-900">
-						Peraturan
-					</Link> */}
-					<Link href="#" className="text-gray-400 hover:text-gray-700">
+					</Link>*/}
+					{/* <Link href="#" className="text-gray-400 hover:text-gray-900 pt-1">
+							Peraturan
+						</Link>  */}
+					<Link href="/login" className="text-gray-400 hover:text-gray-700">
 						<CircleUserRound />
 					</Link>
 				</nav>
