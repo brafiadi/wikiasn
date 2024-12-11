@@ -5,7 +5,29 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { CircleUserRound, Search } from "lucide-react";
 
-export default function WikiAsnHomepage() {
+const apiUrl = process.env.API_URL;
+
+const getData = async () => {
+	const res = await fetch(`${apiUrl}/master-data/menu`);
+	const data = await res.json();
+	return data.data;
+};
+
+interface MenuData {
+	id: number;
+	menu: string;
+	link: string;
+	deskripsi: string;
+}
+
+export default async function WikiAsnHomepage() {
+	// const data = await fetch('https://app.brafiadi.space/api/wikiasn/master-data/menu')
+	const data = await getData();
+	if (!data) {
+		return <div>Loading...</div>;
+	}
+	// console.log(data);
+
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
 			<div className="container mx-auto px-4">
@@ -18,17 +40,17 @@ export default function WikiAsnHomepage() {
 					</select> */}
 					{/* <Link href="#" className="text-gray-600 hover:text-gray-900">
 						Libur Nasional
-					</Link>
-					<Link href="#" className="text-gray-600 hover:text-gray-900">
-						Peraturan
-					</Link> */}
-					<Link href="#" className="text-gray-400 hover:text-gray-700">
+					</Link>*/}
+					{/* <Link href="#" className="text-gray-400 hover:text-gray-900 pt-1">
+							Peraturan
+						</Link>  */}
+					<Link href="/login" className="text-gray-400 hover:text-gray-700">
 						<CircleUserRound />
 					</Link>
 				</nav>
 
 				<main className="mx-auto max-w-4xl py-12">
-					<div className="text-center mb-16">
+					<div className="text-center mb-8">
 						<h1 className="text-5xl font-serif mb-1">WikiASN</h1>
 						<p className="text-gray-600">Ensikolpedia Aparatur Sipil Negara</p>
 					</div>
@@ -42,20 +64,11 @@ export default function WikiAsnHomepage() {
 							className="mb-4"
 						/>
 
-						{/* <div className="text-center mb-4">
-							<p className="text-sm text-gray-600 mb-1">
-								The Free Encyclopedia that Anyone Can Edit
-							</p>
-							<p className="text-sm text-blue-600">
-								6,146,273 Articles in English
-							</p>
-						</div> */}
-
 						<div className="w-full max-w-2xl relative">
 							<Input
 								type="search"
 								placeholder="Cari apa yang ingin kamu ketahui"
-								className="w-full pl-4 pr-12 py-6 text-lg rounded-full border-gray-200"
+								className="w-full pl-4 pr-12 py-6 text-lg rounded-full border-gray-200 shadow-sm"
 							/>
 							<Button
 								size="icon"
@@ -65,41 +78,24 @@ export default function WikiAsnHomepage() {
 							</Button>
 						</div>
 
-						<Link href="/hari-libur">
-							<Card className="w-full max-w-2xl p-4 mt-8">
-								<div className="flex gap-4">
-									<div>
-										<h2 className="font-medium mb-2">
-											Hari Libur
-										</h2>
-										<p className="text-sm text-gray-600 mb-2">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Sed diam magna, efficitur in felis sed, eleifend tempor
-											velit sed diam...
-										</p>
-										
-									</div>
-								</div>
-							</Card>
-						</Link>
-
-						<Link href="#">
-							<Card className="w-full max-w-2xl p-4 mt-8">
-								<div className="flex gap-4">
-									<div>
-										<h2 className="font-medium mb-2">
-											From today's featured article
-										</h2>
-										<p className="text-sm text-gray-600 mb-2">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Sed diam magna, efficitur in felis sed, eleifend tempor
-											velit sed diam...
-										</p>
-										
-									</div>
-								</div>
-							</Card>
-						</Link>
+						<div className="grid grid-cols-3 gap-4 w-full max-w-2xl ">
+							{data.map((item: MenuData) => (
+								<Link href={item.link} key={item.id}>
+									<Card className="p-4 bg-gray-50 hover:bg-white h-28 hover:border-red-500 hover:border-2">
+										<div className="flex gap-4">
+											<div>
+												<h2 className="font-medium text-sm mb-2">
+													{item.menu}
+												</h2>
+												<p className="text-xs text-gray-600 mb-2">
+													{item.deskripsi}
+												</p>
+											</div>
+										</div>
+									</Card>
+								</Link>
+							))}
+						</div>
 					</div>
 				</main>
 			</div>
