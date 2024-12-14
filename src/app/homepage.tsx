@@ -81,10 +81,10 @@ export default async function WikiAsnHomepage() {
 						<div className="grid grid-cols-3 gap-4 w-full max-w-2xl ">
 							{data.map((item: MenuData) => (
 								<Link href={item.link} key={item.id}>
-									<Card className="p-4 bg-gray-50 hover:bg-white h-28 hover:border-red-500 hover:border-2">
+									<Card className="p-4 h-28 hover:border-red-500 hover:border-2 ">
 										<div className="flex gap-4">
 											<div>
-												<h2 className="font-medium text-sm mb-2">
+												<h2 className="font-medium text-sm mb-2 text-red-600">
 													{item.menu}
 												</h2>
 												<p className="text-xs text-gray-600 mb-2">
