@@ -10,9 +10,9 @@
     "format": "bunx @biomejs/biome format --write ./src"
   },
   "dependencies": {
-    "@radix-ui/react-label": "^2.1.0",
-    "@radix-ui/react-slot": "^1.1.0",
-    "@radix-ui/react-tooltip": "^1.1.4",
+    "@radix-ui/react-label": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-tooltip": "^1.1.5",
     "@tanstack/react-query": "^5.62.7",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
@@ -21,12 +21,13 @@
     "next": "15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "recharts": "^2.15.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/node": "22.10.1",
+    "@types/node": "22.10.2",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "postcss": "^8.4.49",

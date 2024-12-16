@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { CircleUserRound, Search } from "lucide-react";
+import { AlertWrapper } from "@/components/alert-wrapper";
+import { WorkdayAlert } from "@/components/workday-alert";
 
 const apiUrl = process.env.API_URL;
 
@@ -50,6 +52,11 @@ export default async function WikiAsnHomepage() {
 				</nav>
 
 				<main className="mx-auto max-w-4xl py-12">
+					<div className="mb-12">
+						<AlertWrapper>
+							<WorkdayAlert />
+						</AlertWrapper>
+					</div>
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-serif mb-1">WikiASN</h1>
 						<p className="text-gray-600">Ensikolpedia Aparatur Sipil Negara</p>
@@ -81,10 +88,10 @@ export default async function WikiAsnHomepage() {
 						<div className="grid grid-cols-3 gap-4 w-full max-w-2xl ">
 							{data.map((item: MenuData) => (
 								<Link href={item.link} key={item.id}>
-									<Card className="p-4 bg-gray-50 hover:bg-white h-28 hover:border-red-500 hover:border-2">
+									<Card className="p-4 h-28 hover:border-red-500 hover:border-2 ">
 										<div className="flex gap-4">
 											<div>
-												<h2 className="font-medium text-sm mb-2">
+												<h2 className="font-medium text-sm mb-2 text-red-600">
 													{item.menu}
 												</h2>
 												<p className="text-xs text-gray-600 mb-2">
