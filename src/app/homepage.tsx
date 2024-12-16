@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { CircleUserRound, Search } from "lucide-react";
+import { AlertWrapper } from "@/components/alert-wrapper";
+import { WorkdayAlert } from "@/components/workday-alert";
 
 const apiUrl = process.env.API_URL;
 
@@ -50,6 +52,11 @@ export default async function WikiAsnHomepage() {
 				</nav>
 
 				<main className="mx-auto max-w-4xl py-12">
+					<div className="mb-12">
+						<AlertWrapper>
+							<WorkdayAlert />
+						</AlertWrapper>
+					</div>
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-serif mb-1">WikiASN</h1>
 						<p className="text-gray-600">Ensikolpedia Aparatur Sipil Negara</p>
