@@ -33,6 +33,7 @@ interface TunjanganKinerja {
 	median: number;
 	min: number;
 	max: number;
+	mean: number
 	tautan: string;
 	dasar_hukum: string;
 }
@@ -41,7 +42,7 @@ export default async function TunjanganKinerjaTable() {
 	const data = await getListTunjanganKinerjaData();
 
 	return (
-		<div className="min-h-[400px] rounded-lg bg-white my-4 p-4">
+		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
 			<Table>
 				<TableCaption>
 					Sumber: Peraturan Presiden tentang Tunjangan Kinerja dari beberapa
@@ -51,9 +52,10 @@ export default async function TunjanganKinerjaTable() {
 					<TableRow>
 						<TableHead className="w-[50px]">#</TableHead>
 						<TableHead>Instansi</TableHead>
-						<TableHead>Rata-rata</TableHead>
+						<TableHead>Median</TableHead>
 						<TableHead>Terendah</TableHead>
 						<TableHead>Tertinggi</TableHead>
+						<TableHead>Rata-rata</TableHead>
 						<TableHead>Peraturan</TableHead>
 					</TableRow>
 				</TableHeader>
@@ -70,6 +72,9 @@ export default async function TunjanganKinerjaTable() {
 							</TableCell>
 							<TableCell className="text-left">
 								{formatRupiah(item.max)}
+							</TableCell>
+							<TableCell className="text-left">
+								{formatRupiah(item.mean)}
 							</TableCell>
 							<TableCell>
 								<TooltipProvider>

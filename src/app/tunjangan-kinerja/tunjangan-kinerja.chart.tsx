@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { useEffect, useState } from "react";
 import { formatRupiah } from "@/utils/currency";
-import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const unsortedData = [
 	{ name: "Otoritas JKN", min: 2.5, max: 8.0 },
@@ -127,7 +127,9 @@ export default function TunjanganKinerjaChart() {
 	}, []); // Empty dependency array means this runs once on mount
 
 	if (loading)
-		return <div className="h-[600px] rounded-lg bg-white my-4">Loading...</div>;
+		return <div className="h-[600px] rounded-lg bg-white my-4">
+			<Skeleton className="w-full h-full"/>
+		</div>;
 	if (error) return <div>Error: {error.message}</div>;
 
 	// const minSalary = Math.min(...data.map((item) => item.min));
@@ -141,7 +143,7 @@ export default function TunjanganKinerjaChart() {
 	// }
 
 	return (
-		<div className="h-[600px] rounded-lg bg-white my-4">
+		<div className="h-[600px] rounded-lg bg-white my-8 p-8">
 			{data ? (
 				<ResponsiveContainer width="100%" height="100%">
 					<BarChart
@@ -152,8 +154,10 @@ export default function TunjanganKinerjaChart() {
 					>
 						<XAxis
 							type="number"
+							orientation="top"
 							domain={[minSalary, maxSalary]}
 							tickFormatter={(value) => `${formatRupiah(value)}`}
+							padding={{right: 60}}
 						/>
 						<YAxis dataKey="nama" type="category" width={100} />
 						<Tooltip content={<CustomTooltip />} />
