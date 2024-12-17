@@ -3,6 +3,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { CircleUserRound, Search } from "lucide-react";
 import { AlertWrapper } from "@/components/alert-wrapper";
 import { WorkdayAlert } from "@/components/workday-alert";
@@ -46,12 +52,24 @@ export default async function WikiAsnHomepage() {
 					{/* <Link href="#" className="text-gray-400 hover:text-gray-900 pt-1">
 							Peraturan
 						</Link>  */}
-					<Link href="/login" className="text-gray-400 hover:text-gray-700">
-						<CircleUserRound />
-					</Link>
+					<TooltipProvider>
+						<Tooltip delayDuration={100}>
+							<TooltipTrigger>
+								<Link
+									href="/login"
+									className="text-gray-400 hover:text-gray-700"
+								>
+									<CircleUserRound />
+								</Link>
+							</TooltipTrigger>
+							<TooltipContent>
+								<p>Masuk sebagai kontributor</p>
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
 				</nav>
 
-				<main className="mx-auto max-w-4xl py-12">
+				<main className="mx-auto max-w-4xl py-4">
 					<div className="mb-12">
 						<AlertWrapper>
 							<WorkdayAlert />
