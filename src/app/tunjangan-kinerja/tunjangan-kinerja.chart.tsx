@@ -1,6 +1,4 @@
 "use client";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	BarChart,
 	Bar,
@@ -8,8 +6,12 @@ import {
 	YAxis,
 	Tooltip,
 	ResponsiveContainer,
+	LabelList,
 	Cell,
 } from "recharts";
+import { useEffect, useState } from "react";
+import { formatRupiah } from "@/utils/currency";
+import { ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
 const unsortedData = [
 	{ name: "Otoritas JKN", min: 2.5, max: 8.0 },
@@ -26,56 +28,165 @@ const unsortedData = [
 
 const data = [...unsortedData].sort((a, b) => b.max - a.max);
 
+const apiUrl = "https://app.brafiadi.space/api/wikiasn";
+
+const getListTunjanganKinerjaData = async () => {
+	const res = await fetch(`${apiUrl}/tunjangan-kinerja`);
+	const data = await res.json();
+	return data.data;
+};
+
+interface TunjanganKinerja {
+	instansi_id: number;
+	nama: string;
+	mean: number;
+	median: number;
+	min: number;
+	max: number;
+	tautan: string;
+	dasar_hukum: string;
+}
+
 const CustomTooltip = ({ active, payload, label }: any) => {
+	const colors = {
+		min: "#6366f1", // Indigo for min
+		median: "#a855f7", // Purple for median
+		mean: "#ec4899", // Pink for mean
+		max: "#f97316", // Orange for max
+	};
+
 	if (active && payload && payload.length) {
 		const item = payload[0].payload;
 		return (
-			<div className="bg-white p-2 border border-gray-200 rounded shadow-lg">
-				<p className="font-bold">{label}</p>
-				<p>{`Min: Rp ${item.min.toFixed(2)}M`}</p>
-				<p>{`Max: Rp ${item.max.toFixed(2)}M`}</p>
+			<div className="bg-white p-2 border border-gray-200 rounded shadow-lg text-sm text-gray-700">
+				<p className="font-semibold">{label}</p>
+
+				<p>{`Min: ${formatRupiah(item.min)}`}</p>
+				<p>{`Max: ${formatRupiah(item.max)}`}</p>
+				<p>{`Median: ${formatRupiah(item.median)}`}</p>
+				<p>{`Mean: ${formatRupiah(item.mean)}`}</p>
 			</div>
 		);
 	}
 	return null;
 };
 
-export default function SalaryRangeChart() {
-	const minSalary = Math.min(...data.map((item) => item.min));
-	const maxSalary = Math.max(...data.map((item) => item.max));
+const renderCustomizedLabel = (props) => {
+	const { x, y, width, height, value, type } = props;
+	const radius = 10;
+	const colors = {
+		min: "#6366f1", // Indigo for min
+		median: "#a855f7", // Purple for median
+		mean: "#ec4899", // Pink for mean
+		max: "#f97316", // Orange for max
+	};
 
 	return (
-		<Card className="w-full">
-			<CardHeader>
-				<CardTitle>
-					Range Tunjangan Kinerja Pegawai di Instansi Pemerintah Pusat
-				</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<div className="h-[600px] w-full">
-					<ResponsiveContainer width="100%" height="100%">
-						<BarChart
-							data={data}
-							layout="vertical"
-							margin={{ top: 20, right: 30, left: 200, bottom: 5 }}
-						>
-							<XAxis
-								type="number"
-								domain={[minSalary, maxSalary]}
-								tickFormatter={(value) => `${value}M`}
+		<g className="z-40">
+			<circle cx={x + width + 2} cy={y + 1} r={radius} fill={colors[type]} />
+		</g>
+	);
+};
+
+export default function TunjanganKinerjaChart() {
+	const [data, setData] = useState<TunjanganKinerja[]>(null);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	// const data =  getListTunjanganKinerjaData()
+
+	// console.log(data)
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch(`${apiUrl}/tunjangan-kinerja`);
+				if (!response.ok) {
+					throw new Error("Failed to fetch data");
+				}
+				const result = await response.json();
+				setData(result.data);
+				setLoading(false);
+			} catch (error) {
+				setError(error);
+				setLoading(false);
+			}
+		};
+
+		fetchData();
+	}, []); // Empty dependency array means this runs once on mount
+
+	if (loading)
+		return <div className="h-[600px] rounded-lg bg-white my-4">Loading...</div>;
+	if (error) return <div>Error: {error.message}</div>;
+
+	// const minSalary = Math.min(...data.map((item) => item.min));
+	// const maxSalary = Math.max(...data.map((item) => item.max));
+
+	const minSalary = 1000000;
+	const maxSalary = 100000000;
+
+	// if (!data) {
+	// 	return <>Loading ...</>;
+	// }
+
+	return (
+		<div className="h-[600px] rounded-lg bg-white my-4">
+			{data ? (
+				<ResponsiveContainer width="100%" height="100%">
+					<BarChart
+						data={data}
+						layout="vertical"
+						margin={{ top: 20, right: 30, left: 30, bottom: 5 }}
+						barSize={3}
+					>
+						<XAxis
+							type="number"
+							domain={[minSalary, maxSalary]}
+							tickFormatter={(value) => `${formatRupiah(value)}`}
+						/>
+						<YAxis dataKey="nama" type="category" width={100} />
+						<Tooltip content={<CustomTooltip />} />
+						<Bar dataKey="min" stackId="a" fill="transparent">
+							<LabelList
+								dataKey="nama"
+								content={renderCustomizedLabel}
+								type="min"
 							/>
-							<YAxis dataKey="name" type="category" width={180} />
-							<Tooltip content={<CustomTooltip />} />
-							<Bar dataKey="min" stackId="a" fill="transparent" />
-							<Bar dataKey="max" stackId="a">
-								{data.map((entry, index) => (
-									<Cell key={`cell-${index}`} fill="hsl(var(--primary))" />
-								))}
-							</Bar>
-						</BarChart>
-					</ResponsiveContainer>
-				</div>
-			</CardContent>
-		</Card>
+						</Bar>
+						<Bar dataKey="median" stackId="a" fill="hsl(var(--primary))">
+							<LabelList
+								dataKey="nama"
+								content={renderCustomizedLabel}
+								type="median"
+							/>
+						</Bar>
+
+						<Bar dataKey="mean" stackId="a" fill="hsl(var(--primary))">
+							<LabelList
+								dataKey="nama"
+								content={renderCustomizedLabel}
+								type="mean"
+							/>
+						</Bar>
+
+						<Bar dataKey="max" stackId="a">
+							{data.map((item: TunjanganKinerja) => (
+								<Cell
+									key={`cell-${item.instansi_id}`}
+									fill="hsl(var(--primary))"
+								/>
+							))}
+							<LabelList
+								dataKey="nama"
+								content={renderCustomizedLabel}
+								type="max"
+							/>
+						</Bar>
+					</BarChart>
+				</ResponsiveContainer>
+			) : (
+				<></>
+			)}
+		</div>
 	);
 }

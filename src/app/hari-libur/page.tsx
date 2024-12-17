@@ -2,7 +2,7 @@ import HolidayCalendar from "./hari-libur";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "WikiASN - Hari Libur Nasional dan Cuti Bersama",
+	title: "Hari Libur Nasional dan Cuti Bersama - WikiASN",
 };
 
 export default function HariLiburPage() {
