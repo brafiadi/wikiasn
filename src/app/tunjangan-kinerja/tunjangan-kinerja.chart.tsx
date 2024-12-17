@@ -71,8 +71,15 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 	return null;
 };
 
-const renderCustomizedLabel = (props) => {
-	const { x, y, width, height, value, type } = props;
+interface CustomLabelProps {
+	x?: number;
+	y?: number;
+	width?: number;
+	type: "min" | "max" | "median" | "mean";
+}
+
+const CustomLabel = (props: CustomLabelProps) => {
+	const { x = 0, y = 0, width = 0, type } = props;
 	const radius = 10;
 	const colors = {
 		min: "#6366f1", // Indigo for min
@@ -88,10 +95,14 @@ const renderCustomizedLabel = (props) => {
 	);
 };
 
+interface TunjanganKinerjaData {
+	data: any[]; // Replace 'any' with your actual data type
+}
+
 export default function TunjanganKinerjaChart() {
-	const [data, setData] = useState<TunjanganKinerja[]>(null);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
+	const [data, setData] = useState<TunjanganKinerjaData["data"] | null>(null);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<Error | null>(null);
 	// const data =  getListTunjanganKinerjaData()
 
 	// console.log(data)
@@ -106,8 +117,8 @@ export default function TunjanganKinerjaChart() {
 				const result = await response.json();
 				setData(result.data);
 				setLoading(false);
-			} catch (error) {
-				setError(error);
+			} catch (err) {
+				setError(err instanceof Error ? err : new Error("An error occurred"));
 				setLoading(false);
 			}
 		};
@@ -147,26 +158,17 @@ export default function TunjanganKinerjaChart() {
 						<YAxis dataKey="nama" type="category" width={100} />
 						<Tooltip content={<CustomTooltip />} />
 						<Bar dataKey="min" stackId="a" fill="transparent">
-							<LabelList
-								dataKey="nama"
-								content={renderCustomizedLabel}
-								type="min"
-							/>
+							<LabelList dataKey="nama" content={<CustomLabel type="min" />} />
 						</Bar>
 						<Bar dataKey="median" stackId="a" fill="hsl(var(--primary))">
 							<LabelList
 								dataKey="nama"
-								content={renderCustomizedLabel}
-								type="median"
+								content={<CustomLabel type="median" />}
 							/>
 						</Bar>
 
 						<Bar dataKey="mean" stackId="a" fill="hsl(var(--primary))">
-							<LabelList
-								dataKey="nama"
-								content={renderCustomizedLabel}
-								type="mean"
-							/>
+							<LabelList dataKey="nama" content={<CustomLabel type="mean" />} />
 						</Bar>
 
 						<Bar dataKey="max" stackId="a">
@@ -176,11 +178,7 @@ export default function TunjanganKinerjaChart() {
 									fill="hsl(var(--primary))"
 								/>
 							))}
-							<LabelList
-								dataKey="nama"
-								content={renderCustomizedLabel}
-								type="max"
-							/>
+							<LabelList dataKey="nama" content={<CustomLabel type="max" />} />
 						</Bar>
 					</BarChart>
 				</ResponsiveContainer>
