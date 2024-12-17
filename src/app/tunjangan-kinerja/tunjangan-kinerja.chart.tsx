@@ -127,9 +127,11 @@ export default function TunjanganKinerjaChart() {
 	}, []); // Empty dependency array means this runs once on mount
 
 	if (loading)
-		return <div className="h-[600px] rounded-lg bg-white my-4">
-			<Skeleton className="w-full h-full"/>
-		</div>;
+		return (
+			<div className="h-[600px] rounded-lg bg-white my-4">
+				<Skeleton className="w-full h-full" />
+			</div>
+		);
 	if (error) return <div>Error: {error.message}</div>;
 
 	// const minSalary = Math.min(...data.map((item) => item.min));
@@ -157,7 +159,7 @@ export default function TunjanganKinerjaChart() {
 							orientation="top"
 							domain={[minSalary, maxSalary]}
 							tickFormatter={(value) => `${formatRupiah(value)}`}
-							padding={{right: 60}}
+							padding={{ right: 60 }}
 						/>
 						<YAxis dataKey="nama" type="category" width={100} />
 						<Tooltip content={<CustomTooltip />} />
