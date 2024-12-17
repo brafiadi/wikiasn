@@ -12,7 +12,7 @@ export default function TunjangnaKinerjaPage() {
 	return (
 		<>
 			<div className="mb-8 rounded-lg bg-white p-4 m-4">
-				<h1 className="text-center text-2xl font-bold text-neutral-800 md:text-4xl">
+				<h1 className="text-center text-2xl font-bold text-neutral-700 md:text-4xl">
 					TUNJANGAN KINERJA
 				</h1>
 			</div>

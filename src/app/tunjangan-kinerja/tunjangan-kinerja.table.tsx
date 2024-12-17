@@ -36,6 +36,7 @@ interface TunjanganKinerja {
 	mean: number;
 	tautan: string;
 	dasar_hukum: string;
+	slug: string;
 }
 
 export default async function TunjanganKinerjaTable() {
@@ -64,10 +65,13 @@ export default async function TunjanganKinerjaTable() {
 						<TableRow key={item.instansi_id}>
 							<TableCell className="font-medium">{index + 1}</TableCell>
 							<TableCell>
-								<Link href={`tunjangan-kinerja/${item.instansi_id}`} className="hover:text-red-600">
-								{item.nama}
+								<Link
+									href={`tunjangan-kinerja/${item.slug}`}
+									className="hover:text-red-600"
+								>
+									{item.nama}
 								</Link>
-								</TableCell>
+							</TableCell>
 							<TableCell className="text-left">
 								{formatRupiah(item.median)}
 							</TableCell>
