@@ -1,12 +1,11 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import WikiAsnHomepage from "./homepage";
+
+export const dynamic = "force-dynamic";
 
 export default function Home() {
 	return (
 		<div>
 			<WikiAsnHomepage />
-			{/* <Button>Click Me</Button> */}
 		</div>
 	);
 }
