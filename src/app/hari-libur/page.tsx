@@ -5,6 +5,8 @@ export const metadata: Metadata = {
 	title: "Hari Libur Nasional dan Cuti Bersama - WikiASN",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function HariLiburPage() {
 	return (
 		<div className="container mx-auto bg-gray-50/50 w-full">

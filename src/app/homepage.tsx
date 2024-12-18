@@ -110,7 +110,7 @@ export default async function WikiAsnHomepage() {
 									href={item.aktif === true ? item.link : "#"}
 									key={item.id}
 								>
-									<Card className="p-4 h-28 hover:border-red-500 hover:border-2 ">
+									<Card className="p-4 h-28 hover:border-red-500 hover:border-2">
 										<div className="flex gap-4">
 											<div>
 												<h2 className="font-medium text-sm mb-2 text-red-600">
