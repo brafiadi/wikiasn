@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/tooltip";
 import { CircleUserRound, Search } from "lucide-react";
 import { AlertWrapper } from "@/components/alert-wrapper";
-import { WorkdayAlert } from "@/components/workday-alert";
+import { WorkdayAlert, WorkdayAlertSkeleTon } from "@/components/workday-alert";
+import { Suspense } from "react";
 
 const apiUrl = process.env.API_URL;
 
@@ -70,11 +71,13 @@ export default async function WikiAsnHomepage() {
 					</TooltipProvider>
 				</nav>
 
-				<main className="mx-auto max-w-4xl py-4">
+				<main className="mx-auto max-w-4xl p-4">
 					<div className="mb-12">
-						<AlertWrapper>
-							<WorkdayAlert />
-						</AlertWrapper>
+						<Suspense fallback={<WorkdayAlertSkeleTon />}>
+							<AlertWrapper>
+								<WorkdayAlert />
+							</AlertWrapper>
+						</Suspense>
 					</div>
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-serif mb-1">WikiASN</h1>
@@ -94,7 +97,7 @@ export default async function WikiAsnHomepage() {
 							<Input
 								type="search"
 								placeholder="Cari apa yang ingin kamu ketahui"
-								className="w-full pl-4 pr-12 py-6 text-lg rounded-full border-gray-200 shadow-sm"
+								className="w-full pl-4 pr-12 py-6 text-sm md:text-md rounded-full border-gray-200 shadow-sm"
 							/>
 							<Button
 								size="icon"
@@ -104,26 +107,30 @@ export default async function WikiAsnHomepage() {
 							</Button>
 						</div>
 
-						<div className="grid grid-cols-3 gap-4 w-full max-w-2xl ">
-							{data.map((item: MenuData) => (
-								<Link
-									href={item.aktif === true ? item.link : "#"}
-									key={item.id}
-								>
-									<Card className="p-4 h-28 hover:border-red-500 hover:border-2">
-										<div className="flex gap-4">
-											<div>
-												<h2 className="font-medium text-sm mb-2 text-red-600">
-													{item.menu}
-												</h2>
-												<p className="text-xs text-gray-600 mb-2">
-													{item.deskripsi}
-												</p>
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl mb-8">
+							<Suspense>
+								{data.map((item: MenuData) => (
+									<Link
+										href={item.aktif === true ? item.link : "#"}
+										key={item.id}
+									>
+										<Card
+											className={`${item.aktif === true && "hover:border-red-500 hover:border-2"} p-3 md:p-4 h-22 md:h-28 `}
+										>
+											<div className="flex gap-2 md:gap-4">
+												<div>
+													<h2 className="font-medium text-md md:text-sm md:mb-2 text-red-600">
+														{item.menu}
+													</h2>
+													<p className="text-xs text-gray-600 mb-2">
+														{item.deskripsi}
+													</p>
+												</div>
 											</div>
-										</div>
-									</Card>
-								</Link>
-							))}
+										</Card>
+									</Link>
+								))}
+							</Suspense>
 						</div>
 					</div>
 				</main>
