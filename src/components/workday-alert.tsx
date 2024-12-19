@@ -49,5 +49,5 @@ export async function WorkdayAlert() {
 }
 
 export function WorkdayAlertSkeleTon() {
-	return <Skeleton className="w-full" />;
+	return <Skeleton className="w-full h-full" />;
 }

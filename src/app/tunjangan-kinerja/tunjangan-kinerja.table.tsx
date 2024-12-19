@@ -63,7 +63,7 @@ export default async function TunjanganKinerjaTable() {
 				<TableBody>
 					{data.map((item: TunjanganKinerja, index: number) => (
 						<TableRow key={item.instansi_id}>
-							<TableCell className="font-medium">{index + 1}</TableCell>
+							<TableCell className="text-gray-500">{index + 1}</TableCell>
 							<TableCell>
 								<Link
 									href={`tunjangan-kinerja/${item.slug}`}

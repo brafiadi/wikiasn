@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { formatRupiah } from "@/utils/currency";
 import Link from "next/link";
+import type { Metadata } from "next";
 
 interface TunjanganKinerja {
 	id: number;
@@ -17,6 +18,25 @@ interface TunjanganKinerja {
 }
 
 // export const dynamic = "force-dynamic";
+
+// or Dynamic metadata
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ instansi: string }>;
+}) {
+	const instansi = (await params).instansi;
+	const apiUrl = process.env.API_URL;
+	const res = await fetch(
+		`${apiUrl}/tunjangan-kinerja/instansi?nama=${instansi}`,
+	);
+
+	const resData = await res.json();
+	const data = resData.data;
+	return {
+		title: `Tunjangan Kinerja ${data.instansi.nama} - WikiASN`,
+	};
+}
 
 export default async function Page({
 	params,
@@ -51,27 +71,38 @@ export default async function Page({
 					{data.instansi.nama.toUpperCase()}
 				</h2>
 			</div>
-			<div className="mb-8 rounded-lg bg-white p-4 m-4">
-				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead className="w-[50px]">#</TableHead>
-							<TableHead>Kelas Jabatan</TableHead>
-							<TableHead>Tunjangan Kinerja Per Kelas Jabatan</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						{data.tunjangan_kinerja.map(
-							(item: TunjanganKinerja, index: number) => (
-								<TableRow key={item.id}>
-									<TableCell className="text-gray-500">{index + 1}</TableCell>
-									<TableCell>{item.kelas_jabatan}</TableCell>
-									<TableCell>{formatRupiah(item.besaran)}</TableCell>
-								</TableRow>
-							),
-						)}
-					</TableBody>
-				</Table>
+			<div className="grid grid-cols-1 md:grid-cols-8">
+				<div className="col-span-5 mb-8 rounded-lg bg-white p-4 m-4">
+					<Table>
+						<TableHeader>
+							<TableRow>
+								<TableHead className="w-[50px]">#</TableHead>
+								<TableHead>Kelas Jabatan</TableHead>
+								<TableHead>Tunjangan Kinerja Per Kelas Jabatan</TableHead>
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							{data.tunjangan_kinerja.map(
+								(item: TunjanganKinerja, index: number) => (
+									<TableRow key={item.id}>
+										<TableCell className="text-gray-500">{index + 1}</TableCell>
+										<TableCell>{item.kelas_jabatan}</TableCell>
+										<TableCell>{formatRupiah(item.besaran)}</TableCell>
+									</TableRow>
+								),
+							)}
+						</TableBody>
+					</Table>
+				</div>
+				<div className="col-span-3 mb-8 rounded-lg bg-white p-4 m-4 h-fit">
+					<p className="text-sm font-semibold">Sumber:</p>
+
+					<Link href={data.instansi.tautan} target="_blank">
+						<p className="text-sm hover:text-red-500">
+							{data.instansi.dasar_hukum}
+						</p>
+					</Link>
+				</div>
 			</div>
 		</div>
 	);

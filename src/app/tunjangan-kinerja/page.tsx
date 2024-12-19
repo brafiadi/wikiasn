@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 	title: "Tunjangan Kinerja - WikiASN",
 };
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 export default function TunjangnaKinerjaPage() {
 	return (
 		<>
 			<div className="mb-8 rounded-lg bg-white p-4 m-4">
-				<h1 className="text-center text-2xl font-bold text-neutral-700 md:text-4xl">
+				<h1 className="text-center text-xl font-bold text-neutral-700 md:text-2xl">
 					TUNJANGAN KINERJA
 				</h1>
 			</div>
