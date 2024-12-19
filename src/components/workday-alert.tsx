@@ -1,4 +1,5 @@
 import { CalendarDays, Briefcase } from "lucide-react";
+import { Skeleton } from "./ui/skeleton";
 
 const isWorkDay = (date: Date): boolean => {
 	const day = date.getDay();
@@ -45,4 +46,8 @@ export async function WorkdayAlert() {
 			</p>
 		</div>
 	);
+}
+
+export function WorkdayAlertSkeleTon() {
+	return <Skeleton className="w-full" />;
 }
