@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-export default function BlogLayout({
+export default function Layout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
 	return (
-		<section className="container mx-auto  w-full">
-			<div className="min-h-screen max-w-6xl mx-auto bg-orange-200/50 p-4 md:p-8">
+		<section className="container mx-auto w-full">
+			<div className="min-h-screen max-w-6xl mx-auto bg-blue-200/50 p-4 md:p-8">
 				<div className="text-center mb-8">
 					<Link href="/">
 						<h1 className="text-xl font-bold font-serif text-gray-800 mb-1">
