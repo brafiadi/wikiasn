@@ -42,7 +42,7 @@ export async function WorkdayAlert() {
 			>
 				{isWork
 					? `Hari ini ${data.hari_ini}. ${data.pesan}!`
-					: "Today is a holiday. Enjoy your day off!"}
+					: `Hari ini ${data.hari_ini}. ${data.pesan}`}
 			</p>
 		</div>
 	);
