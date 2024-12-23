@@ -109,10 +109,10 @@ export default async function Page({
 	);
 }
 
-export function Loading() {
-	return (
-		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
-			<TableSkeleton rows={17} columns={3}/>
-		</div>
-	);
-}
+// export function Loading() {
+// 	return (
+// 		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
+// 			<TableSkeleton rows={17} columns={3}/>
+// 		</div>
+// 	);
+// }

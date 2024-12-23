@@ -46,7 +46,7 @@ export default function TunjangnaKinerjaPage() {
 	);
 }
 
-export function Loading() {
+function Loading() {
 	return (
 		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
 			<TableSkeleton />
