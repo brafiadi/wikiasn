@@ -3,6 +3,10 @@ import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TunjanganKinerjaTable from "./tunjangan-kinerja.table";
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { TableSkeleton } from "@/components/table-skeleton";
+import { ChartSkeleton } from "@/components/chart-skeleton";
 
 export const metadata: Metadata = {
 	title: "Tunjangan Kinerja - WikiASN",
@@ -26,13 +30,26 @@ export default function TunjangnaKinerjaPage() {
 						<TabsTrigger value="grafik">Grafik</TabsTrigger>
 					</TabsList>
 					<TabsContent value="grafik">
+						<Suspense fallback={<ChartSkeleton />}>
+
 						<TunjanganKinerjaChart />
+						</Suspense>
 					</TabsContent>
 					<TabsContent value="tabel">
-						<TunjanganKinerjaTable />
+						<Suspense fallback={<Loading />}>
+							<TunjanganKinerjaTable />
+						</Suspense>
 					</TabsContent>
 				</Tabs>
 			</div>
 		</>
+	);
+}
+
+export function Loading() {
+	return (
+		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
+			<TableSkeleton />
+		</div>
 	);
 }

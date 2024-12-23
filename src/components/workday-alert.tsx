@@ -34,7 +34,7 @@ export async function WorkdayAlert() {
 				<h2
 					className={`text-md font-semibold ${isWork ? "text-orange-800" : "text-red-800"}`}
 				>
-					{isWork ? "Hari Kerja" : `Hari Libur ${data.hari_libur}`}
+					{isWork ? "Hari Kerja" : `Libur ${data.hari_libur}`}
 				</h2>
 			</div>
 			<p

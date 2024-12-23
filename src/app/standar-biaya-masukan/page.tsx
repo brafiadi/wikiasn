@@ -1,3 +1,5 @@
+import StandarBiayaMasukanTable from "./standar-biaya-masukan.table";
+
 export default function StandarBiayaMasukanPage() {
 	return (
 		<>
@@ -7,7 +9,9 @@ export default function StandarBiayaMasukanPage() {
 				</h1>
 			</div>
 
-			<div className="m-4">table</div>
+			<div className="m-4">
+				<StandarBiayaMasukanTable />
+			</div>
 		</>
 	);
 }
