@@ -111,7 +111,13 @@ export default async function WikiAsnHomepage() {
 							<Suspense>
 								{data.map((item: MenuData) => (
 									<Link
-										href={item.aktif === true ? item.link : "#"}
+										href={
+											item.aktif === true
+												? item.link === "/hari-libur"
+													? `/hari-libur/${new Date().getFullYear()}`
+													: item.link
+												: "#"
+										}
 										key={item.id}
 									>
 										<Card
