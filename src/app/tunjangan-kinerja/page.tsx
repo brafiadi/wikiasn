@@ -31,8 +31,7 @@ export default function TunjangnaKinerjaPage() {
 					</TabsList>
 					<TabsContent value="grafik">
 						<Suspense fallback={<ChartSkeleton />}>
-
-						<TunjanganKinerjaChart />
+							<TunjanganKinerjaChart />
 						</Suspense>
 					</TabsContent>
 					<TabsContent value="tabel">

@@ -16,6 +16,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
 	title: "WikiASN",
 	description: "Ensiklopedia Aparatur Sipil Negara",
+	verification: {
+		google: 'meTZpxTapB3Kl_vM0WZk4hticmn2wQABMODih1NyrQ8'
+	},
 	icons: {
 		icon: "/favicon-96x96.png",
 	},
