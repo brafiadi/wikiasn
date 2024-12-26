@@ -41,19 +41,19 @@ export default async function WikiAsnHomepage() {
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
 			<div className="container mx-auto px-4">
-				<nav className="flex justify-end gap-8 py-4 text-sm align-middle">
-					{/* <select className="bg-transparent">
+				{/* <nav className="flex justify-end gap-8 py-4 text-sm align-middle">
+					<select className="bg-transparent">
 						<option>Choose Language</option>
 						<option>English</option>
 						<option>Español</option>
 						<option>Français</option>
-					</select> */}
-					{/* <Link href="#" className="text-gray-600 hover:text-gray-900">
+					</select>
+					<Link href="#" className="text-gray-600 hover:text-gray-900">
 						Libur Nasional
-					</Link>*/}
-					{/* <Link href="#" className="text-gray-400 hover:text-gray-900 pt-1">
+					</Link>
+					<Link href="#" className="text-gray-400 hover:text-gray-900 pt-1">
 							Peraturan
-						</Link>  */}
+						</Link> 
 					<TooltipProvider>
 						<Tooltip delayDuration={100}>
 							<TooltipTrigger>
@@ -69,10 +69,10 @@ export default async function WikiAsnHomepage() {
 							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
-				</nav>
+				</nav> */}
 
 				<main className="mx-auto max-w-4xl p-4">
-					<div className="mb-12">
+					<div className="mt-4 mb-12">
 						<Suspense fallback={<WorkdayAlertSkeleTon />}>
 							<AlertWrapper>
 								<WorkdayAlert />
@@ -107,7 +107,7 @@ export default async function WikiAsnHomepage() {
 							</Button>
 						</div>
 
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl mb-8">
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl mb-2">
 							<Suspense>
 								{data.map((item: MenuData) => (
 									<Link
@@ -137,6 +137,12 @@ export default async function WikiAsnHomepage() {
 									</Link>
 								))}
 							</Suspense>
+						</div>
+
+						<div className="mb-8 text-red-500 underline text-sm">
+							<Link href='/login'>
+							Masuk sebagai kontributor
+							</Link>
 						</div>
 					</div>
 				</main>
