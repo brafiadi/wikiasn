@@ -42,12 +42,12 @@ export async function WorkdayAlert() {
 			>
 				{isWork
 					? `Hari ini ${data.hari_ini}. ${data.pesan}!`
-					: `Hari ini ${data.hari_ini}. ${data.pesan}`}
+					: `Hari ini ${data.hari_ini}. ${data.pesan}!`}
 			</p>
 		</div>
 	);
 }
 
 export function WorkdayAlertSkeleTon() {
-	return <Skeleton className="w-full h-full" />;
+	return <Skeleton className="w-full h-[80px]" />;
 }
