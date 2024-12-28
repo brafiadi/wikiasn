@@ -11,19 +11,24 @@ export const metadata: Metadata = {
 
 export default function StandarBiayaMasukanPage() {
 	return (
-		<>
-			<div className="mb-8 rounded-lg bg-white p-4 m-4">
-				<h1 className="text-center text-xl font-bold text-neutral-700 md:text-2xl">
-					STANDAR BIAYA MASUKAN
+		<div className="container space-y-8 ">
+			<div className="max-w-5xl mx-auto pt-8">
+				<div className="text-red-600 font-medium mb-2">
+					Ensiklopedia Aparatur Sipil Negara
+				</div>
+				<h1 className="text-5xl font-medium tracking-tight mb-8">
+					Standar Biaya Masukan
 				</h1>
 			</div>
 
-			<div className="m-4">
-				<Suspense fallback={<Loading />}>
-					<StandarBiayaMasukanTable />
-				</Suspense>
+			<div className="bg-white">
+				<div className="max-w-5xl mx-auto py-4 my-auto">
+					<Suspense fallback={<Loading />}>
+						<StandarBiayaMasukanTable />
+					</Suspense>
+				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

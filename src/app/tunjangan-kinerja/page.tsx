@@ -14,34 +14,39 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default function TunjangnaKinerjaPage() {
+export default function Page() {
 	return (
-		<>
-			<div className="mb-8 rounded-lg bg-white p-4 m-4">
-				<h1 className="text-center text-xl font-bold text-neutral-700 md:text-2xl">
-					TUNJANGAN KINERJA
+		<div className="container space-y-8 ">
+			<div className="max-w-5xl mx-auto pt-8">
+				<div className="text-red-600 font-medium mb-2">
+					Ensiklopedia Aparatur Sipil Negara
+				</div>
+				<h1 className="text-5xl font-medium tracking-tight mb-8">
+					Tunjangan Kinerja
 				</h1>
 			</div>
 
-			<div className="m-4">
-				<Tabs defaultValue="tabel">
-					<TabsList>
-						<TabsTrigger value="tabel">Tabel</TabsTrigger>
-						<TabsTrigger value="grafik">Grafik</TabsTrigger>
-					</TabsList>
-					<TabsContent value="grafik">
-						<Suspense fallback={<ChartSkeleton />}>
-							<TunjanganKinerjaChart />
-						</Suspense>
-					</TabsContent>
-					<TabsContent value="tabel">
-						<Suspense fallback={<Loading />}>
-							<TunjanganKinerjaTable />
-						</Suspense>
-					</TabsContent>
-				</Tabs>
+			<div className="bg-white">
+				<div className="max-w-5xl mx-auto py-4 my-auto">
+					<Tabs defaultValue="tabel">
+						<TabsList>
+							<TabsTrigger value="tabel">Daftar Instansi</TabsTrigger>
+							<TabsTrigger value="grafik">Diagram Perbandingan</TabsTrigger>
+						</TabsList>
+						<TabsContent value="grafik">
+							<Suspense fallback={<ChartSkeleton />}>
+								<TunjanganKinerjaChart />
+							</Suspense>
+						</TabsContent>
+						<TabsContent value="tabel">
+							<Suspense fallback={<Loading />}>
+								<TunjanganKinerjaTable />
+							</Suspense>
+						</TabsContent>
+					</Tabs>
+				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 
