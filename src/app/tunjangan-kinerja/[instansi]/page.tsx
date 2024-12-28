@@ -63,22 +63,22 @@ export default async function Page({
 
 	return (
 		<div className="container space-y-8 ">
-			<div className="max-w-5xl mx-auto pt-8">
+			<div className="max-w-5xl mx-auto px-8 md:px-0 pt-8">
 				<div className="text-red-600 font-medium mb-2">
 					Ensiklopedia Aparatur Sipil Negara
 				</div>
 				<Link href="/tunjangan-kinerja">
-					<h1 className="text-5xl font-medium tracking-tight ">
+					<h1 className="text-3xl md:text-5xl font-medium tracking-tight mb-2 md:mb-2">
 						Tunjangan Kinerja
 					</h1>
 				</Link>
-				<h2 className="text-3xl font-medium tracking-tight mb-8">
+				<h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-8">
 					{data.instansi.nama}
 				</h2>
 			</div>
-			<div className="bg-white px-20 py-4">
+			<div className="bg-white px-0 md:px-20 py-4">
 				<div className="grid grid-cols-1 md:grid-cols-8">
-					<div className="col-span-5 mb-8 rounded-lg bg-white px-8 m-4">
+					<div className="col-span-5 mb-8 rounded-lg bg-white px-6 m-0 md:px-8 md:m-4">
 						<Suspense fallback={<SuspenseLoading />}>
 							<Table>
 								<TableHeader>

@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 export default function StandarBiayaMasukanPage() {
 	return (
 		<div className="container space-y-8 ">
-			<div className="max-w-5xl mx-auto pt-8">
+			<div className="max-w-5xl mx-auto px-8 md:px-0 pt-8">
 				<div className="text-red-600 font-medium mb-2">
 					Ensiklopedia Aparatur Sipil Negara
 				</div>
-				<h1 className="text-5xl font-medium tracking-tight mb-8">
+				<h1 className="text-3xl md:text-5xl font-medium tracking-tight mb-2 md:mb-8">
 					Standar Biaya Masukan
 				</h1>
 			</div>
 
 			<div className="bg-white">
-				<div className="max-w-5xl mx-auto py-4 my-auto">
+				<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto">
 					<Suspense fallback={<Loading />}>
 						<StandarBiayaMasukanTable />
 					</Suspense>

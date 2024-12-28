@@ -31,18 +31,21 @@ export default async function Page({
 	const tahun = Number.parseInt(paramTahun);
 
 	return (
-		<div className=" bg-gray-50/50 w-full">
-			<div className="mx-auto min-h-screen max-w-6xl bg-sky-200 p-4 md:p-8 shadow-md">
-				<div className="text-center mb-8">
-					<Link href="/">
-						<h1 className="text-xl font-bold font-serif text-gray-800 mb-1">
-							WikiASN
-						</h1>
-					</Link>
-					<p className="text-sm text-gray-600">
-						Ensikolpedia Aparatur Sipil Negara
-					</p>
+		<div className="container space-y-8 ">
+			<div className="max-w-5xl mx-auto px-8 md:px-0 pt-8">
+				<div className="text-red-600 font-medium mb-2">
+					Ensiklopedia Aparatur Sipil Negara
 				</div>
+				<Link href="/tunjangan-kinerja">
+					<h1 className="text-3xl md:text-5xl font-medium tracking-tight mb-2 md:mb-2">
+						Hari Libur Nasional dan Cuti Bersama
+					</h1>
+				</Link>
+				<h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-8">
+					Tahun {tahun}
+				</h2>
+			</div>
+			<div className="bg-white px-0 md:px-20 py-4">
 				<Suspense fallback={<Loading />}>
 					<HariLibur tahun={tahun} />
 				</Suspense>
@@ -53,7 +56,7 @@ export default async function Page({
 
 function Loading() {
 	return (
-		<div className="mx-auto min-h-[70vh] max-w-6xl bg-sky-200 p-4 md:p-8">
+		<div className="mx-auto min-h-[70vh] max-w-6xl p-4 md:p-8">
 			<Loader />
 		</div>
 	);
