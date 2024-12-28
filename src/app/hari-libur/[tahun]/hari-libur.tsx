@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const apiUrl = process.env.API_URL;
 
@@ -80,29 +81,19 @@ export default async function HariLibur({ tahun }: { tahun: number }) {
 	// console.log(formattedData);
 
 	return (
-		<div className="mx-auto min-h-screen max-w-6xl bg-sky-200 p-4 md:p-8">
-			<div className="text-center mb-8">
-				<Link href="/">
-					<h1 className="text-xl font-bold font-serif text-gray-800 mb-1">
-						WikiASN
-					</h1>
-				</Link>
-				<p className="text-sm text-gray-600">
-					Ensikolpedia Aparatur Sipil Negara
-				</p>
+		<div className="mx-auto max-w-6xl">
+			{/* Header */}
+			<div className="mb-8 rounded-lg bg-white/90 p-4">
+				<h1 className="text-center text-2xl font-bold text-navy-900 md:text-4xl">
+					HARI LIBUR NASIONAL
+				</h1>
+				<h2 className="text-center text-xl font-bold text-navy-900 md:text-3xl">
+					DAN CUTI BERSAMA TAHUN {tahun}
+				</h2>
 			</div>
-			<div className="mx-auto max-w-6xl">
-				{/* Header */}
-				<div className="mb-8 rounded-lg bg-white/90 p-4">
-					<h1 className="text-center text-2xl font-bold text-navy-900 md:text-4xl">
-						HARI LIBUR NASIONAL
-					</h1>
-					<h2 className="text-center text-xl font-bold text-navy-900 md:text-3xl">
-						DAN CUTI BERSAMA TAHUN {tahun}
-					</h2>
-				</div>
 
-				<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+			<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+				<Suspense fallback={<>....</>}>
 					{formattedData
 						.filter((item: NewHariLibur) => item.kategori === "Libur Nasional")
 						.map((item: NewHariLibur) => (
@@ -125,9 +116,11 @@ export default async function HariLibur({ tahun }: { tahun: number }) {
 								</div>
 							</Card>
 						))}
-				</div>
+				</Suspense>
+			</div>
 
-				<div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+			<div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+				<Suspense fallback={<>....</>}>
 					{formattedData
 						.filter((item: NewHariLibur) => item.kategori === "Cuti Bersama")
 						.map((item: NewHariLibur) => (
@@ -150,14 +143,7 @@ export default async function HariLibur({ tahun }: { tahun: number }) {
 								</div>
 							</Card>
 						))}
-				</div>
-
-				{/* Footer */}
-				{/* <div className="mt-8 text-center text-sm text-white">
-					<p>
-						SUMBER: Sindonews.com • NASKAH: Binti Mufarida • INFOGRAFIS: David
-					</p>
-				</div> */}
+				</Suspense>
 			</div>
 		</div>
 	);
