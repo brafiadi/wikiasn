@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/table";
 import { formatRupiah } from "@/utils/currency";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { Suspense } from "react";
 
@@ -65,18 +64,16 @@ export default async function Page({
 		<div className="container space-y-8 ">
 			<div className="max-w-5xl mx-auto px-8 md:px-0 pt-8">
 				<div className="text-red-600 font-medium mb-2">
-					Ensiklopedia Aparatur Sipil Negara
+					<Link href="/tunjangan-kinerja">Tunjangan Kinerja</Link>
 				</div>
-				<Link href="/tunjangan-kinerja">
+
+				<Suspense fallback={<>...</>}>
 					<h1 className="text-3xl md:text-5xl font-medium tracking-tight mb-2 md:mb-2">
-						Tunjangan Kinerja
+						{data.instansi.nama}
 					</h1>
-				</Link>
-				<h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-8">
-					{data.instansi.nama}
-				</h2>
+				</Suspense>
 			</div>
-			<div className="bg-white px-0 md:px-20 py-4">
+			<div className="bg-white px-6 md:px-28 py-4">
 				<div className="grid grid-cols-1 md:grid-cols-8">
 					<div className="col-span-5 mb-8 rounded-lg bg-white px-6 m-0 md:px-8 md:m-4">
 						<Suspense fallback={<SuspenseLoading />}>
@@ -106,12 +103,13 @@ export default async function Page({
 					</div>
 					<div className="col-span-3 mb-8 rounded-lg bg-gray-100 p-4 m-4 h-fit">
 						<p className="text-sm font-semibold">Sumber:</p>
-
-						<Link href={data.instansi.tautan} target="_blank">
-							<p className="text-sm hover:text-red-500">
-								{data.instansi.dasar_hukum}
-							</p>
-						</Link>
+						<Suspense fallback={<>...</>}>
+							<Link href={data.instansi.tautan} target="_blank">
+								<p className="text-sm hover:text-red-500">
+									{data.instansi.dasar_hukum}
+								</p>
+							</Link>
+						</Suspense>
 					</div>
 				</div>
 			</div>

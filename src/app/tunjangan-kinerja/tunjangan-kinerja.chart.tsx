@@ -145,7 +145,7 @@ export default function TunjanganKinerjaChart() {
 	// }
 
 	return (
-		<div className="h-[600px] rounded-lg bg-gray-100/40 my-8 p-8">
+		<div className="h-[600px] rounded-lg bg-gray-100/20 my-8 p-8">
 			{data ? (
 				<ResponsiveContainer width="100%" height="100%">
 					<BarChart
