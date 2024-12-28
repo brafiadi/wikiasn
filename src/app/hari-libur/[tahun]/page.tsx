@@ -32,7 +32,7 @@ export default async function Page({
 
 	return (
 		<div className=" bg-gray-50/50 w-full">
-			<div className="mx-auto min-h-screen max-w-6xl bg-sky-200 p-4 md:p-8">
+			<div className="mx-auto min-h-screen max-w-6xl bg-sky-200 p-4 md:p-8 shadow-md">
 				<div className="text-center mb-8">
 					<Link href="/">
 						<h1 className="text-xl font-bold font-serif text-gray-800 mb-1">
@@ -43,18 +43,18 @@ export default async function Page({
 						Ensikolpedia Aparatur Sipil Negara
 					</p>
 				</div>
-				{/* <Suspense fallback={<Loading />}> */}
-				<HariLibur tahun={tahun} />
-				{/* </Suspense> */}
+				<Suspense fallback={<Loading />}>
+					<HariLibur tahun={tahun} />
+				</Suspense>
 			</div>
 		</div>
 	);
 }
 
-// export function Loading() {
-// 	return (
-// 		<div className="mx-auto min-h-screen max-w-6xl bg-sky-200 p-4 md:p-8">
-// 			<Loader />
-// 		</div>
-// 	);
-// }
+function Loading() {
+	return (
+		<div className="mx-auto min-h-[70vh] max-w-6xl bg-sky-200 p-4 md:p-8">
+			<Loader />
+		</div>
+	);
+}

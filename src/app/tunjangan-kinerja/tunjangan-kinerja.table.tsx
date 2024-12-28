@@ -43,9 +43,9 @@ export default async function TunjanganKinerjaTable() {
 	const data = await getListTunjanganKinerjaData();
 
 	return (
-		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
+		<div className="min-h-[400px] rounded-lg bg-white p-8 ">
 			<Table>
-				<TableCaption>
+				<TableCaption className="bg-gray-100">
 					Sumber: Peraturan Presiden tentang Tunjangan Kinerja dari beberapa
 					instansi
 				</TableCaption>

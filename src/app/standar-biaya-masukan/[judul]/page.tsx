@@ -6,16 +6,21 @@ export default async function Page({
 	const judul = (await params).judul;
 
 	return (
-		<div>
-			<div className="mb-8 rounded-lg bg-white p-4 m-4">
+		<div className="container space-y-8 ">
+			<div className="max-w-5xl mx-auto pt-8">
+				<div className="text-red-600 font-medium mb-2">
+					Ensiklopedia Aparatur Sipil Negara
+				</div>
 				<Link href="/standar-biaya-masukan">
-					<h2 className="text-center text-2xl font-bold text-neutral-800 md:text-2xl">
-						STANDAR BIAYA MASUKAN
-					</h2>
+					<h1 className="text-5xl font-medium tracking-tight ">
+						Standar Biaya Masukan
+					</h1>
 				</Link>
-				<h2 className="text-center text-2xl font-bold text-neutral-900 md:text-2xl">
-					{judul}
-				</h2>
+				<h2 className="text-3xl font-medium tracking-tight mb-8">{judul}</h2>
+			</div>
+
+			<div className="bg-white">
+				<div className="max-w-5xl mx-auto py-4 my-auto"></div>
 			</div>
 		</div>
 	);

@@ -62,52 +62,57 @@ export default async function Page({
 	// console.log(data);
 
 	return (
-		<div>
-			<div className="mb-8 rounded-lg bg-white p-4 m-4">
+		<div className="container space-y-8 ">
+			<div className="max-w-5xl mx-auto pt-8">
+				<div className="text-red-600 font-medium mb-2">
+					Ensiklopedia Aparatur Sipil Negara
+				</div>
 				<Link href="/tunjangan-kinerja">
-					<h2 className="text-center text-2xl font-bold text-neutral-800 md:text-2xl">
-						TUNJANGAN KINERJA
-					</h2>
+					<h1 className="text-5xl font-medium tracking-tight ">
+						Tunjangan Kinerja
+					</h1>
 				</Link>
-				<h2 className="text-center text-2xl font-bold text-neutral-900 md:text-2xl">
-					{data.instansi.nama.toUpperCase()}
+				<h2 className="text-3xl font-medium tracking-tight mb-8">
+					{data.instansi.nama}
 				</h2>
 			</div>
-			<div className="grid grid-cols-1 md:grid-cols-8">
-				<div className="col-span-5 mb-8 rounded-lg bg-white p-4 m-4">
-					<Suspense fallback={<SuspenseLoading />}>
-						<Table>
-							<TableHeader>
-								<TableRow>
-									<TableHead className="w-[50px]">#</TableHead>
-									<TableHead>Kelas Jabatan</TableHead>
-									<TableHead>Tunjangan Kinerja Per Kelas Jabatan</TableHead>
-								</TableRow>
-							</TableHeader>
-							<TableBody>
-								{data.tunjangan_kinerja.map(
-									(item: TunjanganKinerja, index: number) => (
-										<TableRow key={item.id}>
-											<TableCell className="text-gray-500">
-												{index + 1}
-											</TableCell>
-											<TableCell>{item.kelas_jabatan}</TableCell>
-											<TableCell>{formatRupiah(item.besaran)}</TableCell>
-										</TableRow>
-									),
-								)}
-							</TableBody>
-						</Table>
-					</Suspense>
-				</div>
-				<div className="col-span-3 mb-8 rounded-lg bg-white p-4 m-4 h-fit">
-					<p className="text-sm font-semibold">Sumber:</p>
+			<div className="bg-white px-20 py-4">
+				<div className="grid grid-cols-1 md:grid-cols-8">
+					<div className="col-span-5 mb-8 rounded-lg bg-white px-8 m-4">
+						<Suspense fallback={<SuspenseLoading />}>
+							<Table>
+								<TableHeader>
+									<TableRow>
+										<TableHead className="w-[50px]">#</TableHead>
+										<TableHead>Kelas Jabatan</TableHead>
+										<TableHead>Tunjangan Kinerja Per Kelas Jabatan</TableHead>
+									</TableRow>
+								</TableHeader>
+								<TableBody>
+									{data.tunjangan_kinerja.map(
+										(item: TunjanganKinerja, index: number) => (
+											<TableRow key={item.id}>
+												<TableCell className="text-gray-500">
+													{index + 1}
+												</TableCell>
+												<TableCell>{item.kelas_jabatan}</TableCell>
+												<TableCell>{formatRupiah(item.besaran)}</TableCell>
+											</TableRow>
+										),
+									)}
+								</TableBody>
+							</Table>
+						</Suspense>
+					</div>
+					<div className="col-span-3 mb-8 rounded-lg bg-gray-100 p-4 m-4 h-fit">
+						<p className="text-sm font-semibold">Sumber:</p>
 
-					<Link href={data.instansi.tautan} target="_blank">
-						<p className="text-sm hover:text-red-500">
-							{data.instansi.dasar_hukum}
-						</p>
-					</Link>
+						<Link href={data.instansi.tautan} target="_blank">
+							<p className="text-sm hover:text-red-500">
+								{data.instansi.dasar_hukum}
+							</p>
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>

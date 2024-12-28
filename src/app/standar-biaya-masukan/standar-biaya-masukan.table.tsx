@@ -28,9 +28,9 @@ export default async function StandarBiayaMasukanTable() {
 	const data = await getListStandarBiayaMasukanData();
 
 	return (
-		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
+		<div className="min-h-[400px] rounded-lg bg-white  py-8">
 			<Table>
-				<TableCaption>
+				<TableCaption className="bg-gray-100">
 					Sumber: Peraturan Menteri Keuangan tentang Standar Biaya Masukan
 				</TableCaption>
 				<TableHeader>
