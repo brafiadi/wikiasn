@@ -81,7 +81,7 @@ export default async function WikiAsnHomepage() {
 					</div>
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-serif mb-1">WikiASN</h1>
-						<p className="text-gray-600">Ensikolpedia Aparatur Sipil Negara</p>
+						<p className="text-gray-600">Ensiklopedia Aparatur Sipil Negara</p>
 					</div>
 
 					<div className="flex flex-col items-center gap-8">
