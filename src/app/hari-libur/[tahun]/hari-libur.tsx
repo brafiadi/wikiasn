@@ -81,17 +81,7 @@ export default async function HariLibur({ tahun }: { tahun: number }) {
 	// console.log(formattedData);
 
 	return (
-		<div className="mx-auto max-w-6xl">
-			{/* Header */}
-			<div className="mb-8 rounded-lg bg-white/90 p-4">
-				<h1 className="text-center text-2xl font-bold text-navy-900 md:text-4xl">
-					HARI LIBUR NASIONAL
-				</h1>
-				<h2 className="text-center text-xl font-bold text-navy-900 md:text-3xl">
-					DAN CUTI BERSAMA TAHUN {tahun}
-				</h2>
-			</div>
-
+		<div className="mx-auto max-w-6xl p-8">
 			<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
 				<Suspense fallback={<>....</>}>
 					{formattedData
@@ -99,7 +89,7 @@ export default async function HariLibur({ tahun }: { tahun: number }) {
 						.map((item: NewHariLibur) => (
 							<Card
 								key={item.id}
-								className="flex flex-col overflow-hidden border-2 border-gray-200 bg-white"
+								className="flex flex-col overflow-hidden border-2 border-gray-200 bg-gray-100/60"
 							>
 								<div className="bg-red-600 p-2">
 									<h3 className="text-center text-sm font-semibold text-white md:text-base">
@@ -126,7 +116,7 @@ export default async function HariLibur({ tahun }: { tahun: number }) {
 						.map((item: NewHariLibur) => (
 							<Card
 								key={item.id}
-								className="flex flex-col overflow-hidden border-2 border-gray-200 bg-white"
+								className="flex flex-col overflow-hidden border-2 border-gray-200 bg-gray-100/60"
 							>
 								<div className="bg-gray-600 p-2">
 									<h3 className="text-center text-sm font-semibold text-white md:text-base">
