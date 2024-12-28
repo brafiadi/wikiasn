@@ -11,6 +11,7 @@ import { formatRupiah } from "@/utils/currency";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { TableSkeleton } from "@/components/table-skeleton";
+import { Suspense } from "react";
 
 interface TunjanganKinerja {
 	id: number;
@@ -18,7 +19,7 @@ interface TunjanganKinerja {
 	besaran: number;
 }
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 // or Dynamic metadata
 export async function generateMetadata({
@@ -74,26 +75,30 @@ export default async function Page({
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-8">
 				<div className="col-span-5 mb-8 rounded-lg bg-white p-4 m-4">
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead className="w-[50px]">#</TableHead>
-								<TableHead>Kelas Jabatan</TableHead>
-								<TableHead>Tunjangan Kinerja Per Kelas Jabatan</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							{data.tunjangan_kinerja.map(
-								(item: TunjanganKinerja, index: number) => (
-									<TableRow key={item.id}>
-										<TableCell className="text-gray-500">{index + 1}</TableCell>
-										<TableCell>{item.kelas_jabatan}</TableCell>
-										<TableCell>{formatRupiah(item.besaran)}</TableCell>
-									</TableRow>
-								),
-							)}
-						</TableBody>
-					</Table>
+					<Suspense fallback={<SuspenseLoading />}>
+						<Table>
+							<TableHeader>
+								<TableRow>
+									<TableHead className="w-[50px]">#</TableHead>
+									<TableHead>Kelas Jabatan</TableHead>
+									<TableHead>Tunjangan Kinerja Per Kelas Jabatan</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{data.tunjangan_kinerja.map(
+									(item: TunjanganKinerja, index: number) => (
+										<TableRow key={item.id}>
+											<TableCell className="text-gray-500">
+												{index + 1}
+											</TableCell>
+											<TableCell>{item.kelas_jabatan}</TableCell>
+											<TableCell>{formatRupiah(item.besaran)}</TableCell>
+										</TableRow>
+									),
+								)}
+							</TableBody>
+						</Table>
+					</Suspense>
 				</div>
 				<div className="col-span-3 mb-8 rounded-lg bg-white p-4 m-4 h-fit">
 					<p className="text-sm font-semibold">Sumber:</p>
@@ -109,10 +114,10 @@ export default async function Page({
 	);
 }
 
-// export function Loading() {
-// 	return (
-// 		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
-// 			<TableSkeleton rows={17} columns={3}/>
-// 		</div>
-// 	);
-// }
+function SuspenseLoading() {
+	return (
+		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
+			<TableSkeleton rows={17} columns={3} />
+		</div>
+	);
+}

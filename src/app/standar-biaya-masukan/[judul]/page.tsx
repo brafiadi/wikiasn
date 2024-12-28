@@ -8,7 +8,7 @@ export default async function Page({
 	return (
 		<div>
 			<div className="mb-8 rounded-lg bg-white p-4 m-4">
-				<Link href="/tunjangan-kinerja">
+				<Link href="/standar-biaya-masukan">
 					<h2 className="text-center text-2xl font-bold text-neutral-800 md:text-2xl">
 						STANDAR BIAYA MASUKAN
 					</h2>

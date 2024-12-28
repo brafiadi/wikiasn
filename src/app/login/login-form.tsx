@@ -13,16 +13,14 @@ import { Label } from "@/components/ui/label";
 
 export function LoginForm() {
 	return (
-		<Card className="mx-auto max-w-sm min-w-[400px]">
+		<Card className="mx-auto max-w-sm min-w-[250px] md:min-w-[400px]">
 			<CardHeader>
 				<CardTitle className="text-xl">WikiASN Kontributor</CardTitle>
-				<CardDescription>
-					Silahkan masukkan menggunakan akun
-				</CardDescription>
+				<CardDescription>Silahkan masukkan menggunakan akun</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<div className="grid gap-4">
-						{/* <div className="grid gap-2">
+					{/* <div className="grid gap-2">
 						<Label htmlFor="email">Email</Label>
 						<Input
 							id="email"
@@ -40,12 +38,8 @@ export function LoginForm() {
 						</div>
 						<Input id="password" type="password" required />
 					</div> */}
-					<Button  className="w-full">
-						Masuk dengan INApas
-					</Button>
-					<Button className="w-full">
-						Masuk dengan Google
-					</Button>
+					<Button className="w-full">Masuk dengan INApas</Button>
+					<Button className="w-full">Masuk dengan Google</Button>
 				</div>
 				<div className="mt-4 text-center text-sm">
 					{/* Don&apos;t have an account?{" "}

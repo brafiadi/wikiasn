@@ -1,4 +1,13 @@
+import { Suspense } from "react";
+import type { Metadata } from "next";
 import StandarBiayaMasukanTable from "./standar-biaya-masukan.table";
+import { TableSkeleton } from "@/components/table-skeleton";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+	title: "Standar Biaya Masukan - WikiASN",
+};
 
 export default function StandarBiayaMasukanPage() {
 	return (
@@ -10,8 +19,18 @@ export default function StandarBiayaMasukanPage() {
 			</div>
 
 			<div className="m-4">
-				<StandarBiayaMasukanTable />
+				<Suspense fallback={<Loading />}>
+					<StandarBiayaMasukanTable />
+				</Suspense>
 			</div>
 		</>
+	);
+}
+
+function Loading() {
+	return (
+		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
+			<TableSkeleton columns={3} />
+		</div>
 	);
 }

@@ -108,7 +108,7 @@ export default async function WikiAsnHomepage() {
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl mb-2">
-							<Suspense>
+							<Suspense fallback={<>...</>}>
 								{data.map((item: MenuData) => (
 									<Link
 										href={
@@ -120,29 +120,42 @@ export default async function WikiAsnHomepage() {
 										}
 										key={item.id}
 									>
-										<Card
-											className={`${item.aktif === true && "hover:border-red-500 hover:border-2"} p-3 md:p-4 h-22 md:h-28 `}
-										>
-											<div className="flex gap-2 md:gap-4">
-												<div>
-													<h2 className="font-medium text-md md:text-sm md:mb-2 text-red-600">
-														{item.menu}
-													</h2>
-													<p className="text-xs text-gray-600 mb-2">
-														{item.deskripsi}
-													</p>
-												</div>
-											</div>
-										</Card>
+										<TooltipProvider>
+											<Tooltip delayDuration={0}>
+												<TooltipTrigger asChild>
+													<Card
+														className={`${item.aktif === true && "hover:border-red-500 hover:border-2 b"} p-3 md:p-4 h-22 md:h-28 ${item.aktif === false && "bg-gray-100"}`}
+													>
+														<div className="flex gap-2 md:gap-4">
+															<div>
+																<h2 className="font-medium text-md md:text-sm md:mb-2 text-red-600">
+																	{item.menu}
+																</h2>
+																<p className="text-xs text-gray-600 mb-2">
+																	{item.deskripsi}
+																</p>
+															</div>
+														</div>
+													</Card>
+												</TooltipTrigger>
+												{item.aktif === false && (
+													<TooltipContent
+														side="top"
+														className="bg-gray-50"
+														sideOffset={-10}
+													>
+														<p>Dalam pengembangan</p>
+													</TooltipContent>
+												)}
+											</Tooltip>
+										</TooltipProvider>
 									</Link>
 								))}
 							</Suspense>
 						</div>
 
 						<div className="mb-8 text-red-500 underline text-sm">
-							<Link href='/login'>
-							Masuk sebagai kontributor
-							</Link>
+							<Link href="/login">Masuk sebagai kontributor</Link>
 						</div>
 					</div>
 				</main>

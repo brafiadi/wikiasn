@@ -31,8 +31,7 @@ export default async function StandarBiayaMasukanTable() {
 		<div className="min-h-[400px] rounded-lg bg-white my-8 p-8">
 			<Table>
 				<TableCaption>
-					Sumber: Peraturan Presiden tentang Tunjangan Kinerja dari beberapa
-					instansi
+					Sumber: Peraturan Menteri Keuangan tentang Standar Biaya Masukan
 				</TableCaption>
 				<TableHeader>
 					<TableRow>
