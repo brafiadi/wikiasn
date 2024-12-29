@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "WikiASN",
+	title: "WikiASN - Ensiklopedia Aparatur Sipil Negara",
 	description: "Ensiklopedia Aparatur Sipil Negara",
 	verification: {
 		google: "v3X9GMlhi_PCQTrpxwM_hDFIy0gc7ZJYQkrYtE4OT7U",
@@ -31,6 +31,20 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				<script
+					async
+					src="https://www.googletagmanager.com/gtag/js?id=G-1SM9R762R2"
+				/>
+				<script id="google-analytics">
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', 'G-1SM9R762R2');
+					`}
+				</script>
+			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>

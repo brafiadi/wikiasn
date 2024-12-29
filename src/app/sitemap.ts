@@ -16,8 +16,7 @@ interface ApiResponse {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	// Get base URL from environment variable
-	const baseUrl =
-		process.env.NEXT_PUBLIC_DOMAIN || "https://wikiasn.id";
+	const baseUrl = process.env.NEXT_PUBLIC_DOMAIN || "https://wikiasn.id";
 	const api = process.env.API_URL;
 
 	try {
