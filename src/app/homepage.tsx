@@ -41,36 +41,6 @@ export default async function WikiAsnHomepage() {
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
 			<div className="container mx-auto px-4">
-				{/* <nav className="flex justify-end gap-8 py-4 text-sm align-middle">
-					<select className="bg-transparent">
-						<option>Choose Language</option>
-						<option>English</option>
-						<option>Español</option>
-						<option>Français</option>
-					</select>
-					<Link href="#" className="text-gray-600 hover:text-gray-900">
-						Libur Nasional
-					</Link>
-					<Link href="#" className="text-gray-400 hover:text-gray-900 pt-1">
-							Peraturan
-						</Link> 
-					<TooltipProvider>
-						<Tooltip delayDuration={100}>
-							<TooltipTrigger>
-								<Link
-									href="/login"
-									className="text-gray-400 hover:text-gray-700"
-								>
-									<CircleUserRound />
-								</Link>
-							</TooltipTrigger>
-							<TooltipContent>
-								<p>Masuk sebagai kontributor</p>
-							</TooltipContent>
-						</Tooltip>
-					</TooltipProvider>
-				</nav> */}
-
 				<main className="mx-auto max-w-4xl p-4">
 					<div className="mt-4 mb-12">
 						<Suspense fallback={<WorkdayAlertSkeleTon />}>
