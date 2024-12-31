@@ -27,6 +27,9 @@ interface StandarBiayaMasukan {
 export default async function StandarBiayaMasukanTable() {
 	const data = await getListStandarBiayaMasukanData();
 
+	// const tahun = new Date().getFullYear();
+	const tahun = 2025;
+
 	return (
 		<div className="min-h-[400px] rounded-lg bg-white  py-8">
 			<Table>
@@ -46,7 +49,7 @@ export default async function StandarBiayaMasukanTable() {
 							<TableCell className="text-gray-500">{index + 1}</TableCell>
 							<TableCell>
 								<Link
-									href={`standar-biaya-masukan/${item.link}`}
+									href={`data-standar-biaya-masukan/${item.link}/${tahun}`}
 									className="hover:text-red-600"
 								>
 									{item.judul}
