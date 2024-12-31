@@ -2,6 +2,13 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import StandarBiayaMasukanTable from "./standar-biaya-masukan.table";
 import { TableSkeleton } from "@/components/table-skeleton";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +30,20 @@ export default function StandarBiayaMasukanPage() {
 
 			<div className="bg-white">
 				<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto">
+					{/* <div className="flex ">
+						Tahun Anggaran
+						<Select>
+							<SelectTrigger className="w-[180px] h-[40px]">
+								<SelectValue placeholder="2025" />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="light">2024</SelectItem>
+								<SelectItem value="dark">2025</SelectItem>
+								<SelectItem value="system">2024</SelectItem>
+							</SelectContent>
+						</Select>
+					</div> */}
+
 					<Suspense fallback={<Loading />}>
 						<StandarBiayaMasukanTable />
 					</Suspense>
