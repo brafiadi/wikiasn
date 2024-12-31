@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import DataSBMTable from "./data-sbm.table";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +33,8 @@ export default async function Page({
 
 	const data = await getDetailSBMData(sbm, tahun);
 
+	// console.log(data)
+
 	// Tambahkan pengecekan data
 	if (!data || !data.data || data.data.length === 0) {
 		return (
@@ -46,7 +49,7 @@ export default async function Page({
 				</div>
 
 				<div className="bg-white px-0 md:px-20 py-4">
-					<div className="max-w-5xl mx-auto py-4 my-auto text-gray-500">
+					<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto text-gray-500">
 						<p>Data tidak ditemukan</p>
 					</div>
 				</div>
@@ -63,19 +66,19 @@ export default async function Page({
 					<Link href="/standar-biaya-masukan">Standar Biaya Masukan</Link>
 				</div>
 				<Suspense fallback={<p>...</p>}>
-
-
-				<h1 className="text-3xl md:text-5xl font-medium tracking-tight mb-2 md:mb-2">
-					{judul}
-				</h1>
-				<h2 className="text-xl md:text-3xl font-medium tracking-tight mb-2 md:mb-2">
-					Tahun Anggaran {tahun}
-				</h2>
+					<h1 className="text-3xl md:text-5xl font-medium tracking-tight mb-2 md:mb-2">
+						{judul}
+					</h1>
+					<h2 className="text-xl md:text-3xl font-medium tracking-tight mb-2 md:mb-2">
+						Tahun Anggaran {tahun}
+					</h2>
 				</Suspense>
 			</div>
 
 			<div className="bg-white px-0 md:px-20 py-4">
-				<div className="max-w-5xl mx-auto py-4 my-auto" />
+				<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto">
+					<DataSBMTable tahun={tahun} sbm={sbm} />
+				</div>
 			</div>
 		</div>
 	);
