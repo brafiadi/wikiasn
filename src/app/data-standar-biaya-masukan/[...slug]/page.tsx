@@ -14,6 +14,33 @@ const getDetailSBMData = async (sbm: string, tahun: string) => {
 	return data;
 };
 
+export async function generateMetadata({params}:{
+	params: Promise<{ slug: string[] }>;
+}){
+	const sbm = (await params).slug[0];
+	const tahun = (await params).slug[1];
+
+	if (!sbm || !tahun) {
+		return {
+			title: "Data Standar Biaya Masukan - WikiASN",
+		};
+	}
+
+	const data = await getDetailSBMData(sbm, tahun);
+
+	if (!data || !data.data || data.data.length === 0) {
+		return {
+			title: "Data Standar Biaya Masukan - WikiASN",
+		};
+	}
+
+	const judul = data.data[0].judul;
+
+	return {
+		title: `Standar Biaya Masukan ${judul} Tahun Anggaran ${tahun} - WikiASN`,
+	};
+}
+
 export default async function Page({
 	params,
 }: {
