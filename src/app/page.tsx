@@ -15,6 +15,9 @@ import { WorkdayAlert, WorkdayAlertSkeleTon } from "@/components/workday-alert";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Loader, { MiniLoader } from "@/components/loader";
+import SearchForm from "@/components/search.form";
+import { searchItems } from "./actions";
+import SearchResults from "@/components/search-result";
 
 export const dynamic = "force-dynamic";
 
@@ -38,7 +41,13 @@ interface MenuData {
 	aktif: boolean;
 }
 
-export default function Page() {
+export default async function Page({
+	searchParams,
+}: {
+	searchParams: { [key: string]: string | string[] | undefined };
+}) {
+	const query = searchParams.cari as string;
+	const results = query ? await searchItems(query) : [];
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
 			<div className="container mx-auto px-4">
@@ -63,27 +72,24 @@ export default function Page() {
 							height={200}
 							className="mb-4"
 						/>
-
 						<div className="w-full max-w-2xl relative">
-							<Input
-								type="search"
-								placeholder="Cari apa yang ingin kamu ketahui"
-								className="w-full pl-4 pr-12 py-6 text-sm md:text-md rounded-full border-gray-200 shadow-sm"
-							/>
-							<Button
-								size="icon"
-								className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full"
-							>
-								<Search className="h-5 w-5" />
-							</Button>
+							<SearchForm />
 						</div>
-
-						<Suspense fallback={<CardLoading />}>
-							<Menu />
-							<div className="mb-8 text-red-500 underline text-sm">
-								<Link href="/login">Masuk sebagai kontributor</Link>
+						{query ? (
+							<div className="w-full max-w-2xl mt-2">
+								<h2 className="text-gray-500 mx-2 mb-4">
+									Hasil pencarian: {query}
+								</h2>
+								<SearchResults results={results} />
 							</div>
-						</Suspense>
+						) : (
+							<Suspense fallback={<CardLoading />}>
+								<Menu />
+								<div className="mb-8 text-red-500 underline text-sm">
+									<Link href="/login">Masuk sebagai kontributor</Link>
+								</div>
+							</Suspense>
+						)}{" "}
 					</div>
 				</main>
 			</div>

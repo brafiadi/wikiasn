@@ -14,9 +14,11 @@ const getDetailSBMData = async (sbm: string, tahun: string) => {
 	return data;
 };
 
-export async function generateMetadata({params}:{
+export async function generateMetadata({
+	params,
+}: {
 	params: Promise<{ slug: string[] }>;
-}){
+}) {
 	const sbm = (await params).slug[0];
 	const tahun = (await params).slug[1];
 
