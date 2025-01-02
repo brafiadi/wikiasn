@@ -44,10 +44,17 @@ interface MenuData {
 export default async function Page({
 	searchParams,
 }: {
-	searchParams: { [key: string]: string | string[] | undefined };
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-	const query = searchParams.cari as string;
-	const results = query ? await searchItems(query) : [];
+	const query = (await searchParams).cari as string;
+	const results = query
+		? (await searchItems(query)).map(
+				(item: { id: number; title: string; link: string }) => ({
+					...item,
+					query,
+				}),
+			)
+		: [];
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
 			<div className="container mx-auto px-4">
