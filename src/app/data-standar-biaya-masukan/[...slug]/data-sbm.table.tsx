@@ -57,7 +57,7 @@ export default async function DataSBMTable({ tahun, sbm }: DataSBMTableProps) {
 
 	return (
 		<Table>
-			<TableCaption>A list of your recent invoices.</TableCaption>
+			<TableCaption>...</TableCaption>
 			<TableHeader>
 				<TableRow>
 					<TableHead className="w-[50px]">No</TableHead>
