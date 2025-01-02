@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import DataSBMTable from "./data-sbm.table";
+import DataSBMTableClient from "./data-sbm.table";
 
 export const dynamic = "force-dynamic";
 
@@ -43,6 +43,20 @@ export async function generateMetadata({
 	};
 }
 
+interface DataSBMTableProps {
+	tahun: string;
+	sbm: string;
+}
+
+interface DataRow {
+	nama_kategori: string;
+}
+
+function getUniqueCategories(data: DataRow[]): string[] {
+	const uniqueCategories = [...new Set(data.map((item) => item.nama_kategori))];
+	return uniqueCategories;
+}
+
 export default async function Page({
 	params,
 }: {
@@ -61,6 +75,8 @@ export default async function Page({
 	}
 
 	const data = await getDetailSBMData(sbm, tahun);
+
+	const kategori = getUniqueCategories(data.data);
 
 	// console.log(data)
 
@@ -106,7 +122,7 @@ export default async function Page({
 
 			<div className="bg-white px-0 md:px-20 py-4">
 				<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto">
-					<DataSBMTable tahun={tahun} sbm={sbm} />
+					<DataSBMTableClient data={data} kategori={kategori} />;
 				</div>
 			</div>
 		</div>

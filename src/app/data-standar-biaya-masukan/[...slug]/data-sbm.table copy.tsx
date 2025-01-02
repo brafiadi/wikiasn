@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import {
 	Table,
 	TableBody,
@@ -13,6 +10,21 @@ import {
 import { formatRupiah } from "@/utils/currency";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from "jotai";
+
+const apiUrl = process.env.API_URL;
+
+const getDetailSBMData = async (sbm: string, tahun: string) => {
+	const res = await fetch(
+		`${apiUrl}/standar-biaya-masukan/data?sbm=${sbm}&tahun=${tahun}`,
+	);
+	const data = await res.json();
+	return data;
+};
+
+interface DataSBMTableProps {
+	tahun: string;
+	sbm: string;
+}
 
 interface SBMDataRow {
 	id: number;
@@ -33,45 +45,42 @@ interface SBMTableHeader {
 	label: string;
 }
 
-interface DataSBMTableClientProps {
-	data: {
-		data: SBMDataRow[];
-		table: Record<string, string | null>;
-	};
-	kategori: string[];
+interface DataRow {
+	nama_kategori: string;
 }
 
-const selectedCategoryAtom = atom<string | null>(null);
+function getUniqueCategories(data: DataRow[]): string[] {
+	// Extract unique categories using Set
+	const uniqueCategories = [...new Set(data.map((item) => item.nama_kategori))];
+	return uniqueCategories;
+}
 
-const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
-	data,
-	kategori,
-}) => {
-	const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
+export default async function DataSBMTable({ tahun, sbm }: DataSBMTableProps) {
+	const data = await getDetailSBMData(sbm, tahun);
 
+	// console.log(data);
+
+	const kategori = getUniqueCategories(data.data);
+
+	// Create an atom to manage the selected category state
+	const selectedCategoryAtom = atom<string | null>(null);
+
+	// console.log(kategori);
+
+	// Filter header columns based on non-null values in the `table` object
 	const tableHeaders = Object.entries(data.table)
 		.filter(([key, value]) => value !== null)
 		.map(([key, value]) => ({ key, label: value }));
 
-	const filteredData = selectedCategory
-		? data.data.filter(
-				(row: SBMDataRow) => row.nama_kategori === selectedCategory,
-			)
-		: data.data;
+	// console.log(tableHeaders);
+
+	const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
 
 	return (
 		<div className="space-y-4">
 			<div className="flex space-x-2 mx-4">
 				{kategori.map((item) => (
-					<Button
-						key={item}
-						className={`h-6 ${selectedCategory === item ? "bg-red-600" : "bg-red-300"}`}
-						onClick={() =>
-							setSelectedCategory(selectedCategory === item ? null : item)
-						}
-					>
-						{item}
-					</Button>
+					<Button className="h-6 bg-red-400">{item}</Button>
 				))}
 			</div>
 			<Table>
@@ -85,7 +94,7 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{filteredData.map((row: SBMDataRow, index: number) => (
+					{data.data.map((row: SBMDataRow, index: number) => (
 						<TableRow key={row.id}>
 							<TableCell>{index + 1}</TableCell>
 							{tableHeaders.map((header) => (
@@ -114,7 +123,5 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 				</TableBody>
 			</Table>
 		</div>
-	)
+	);
 }
-
-export default DataSBMTableClient
