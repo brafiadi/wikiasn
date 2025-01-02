@@ -9,7 +9,6 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { CircleUserRound, Search } from "lucide-react";
 import { AlertWrapper } from "@/components/alert-wrapper";
 import { WorkdayAlert, WorkdayAlertSkeleTon } from "@/components/workday-alert";
 import { Suspense } from "react";
@@ -18,6 +17,8 @@ import Loader, { MiniLoader } from "@/components/loader";
 import SearchForm from "@/components/search.form";
 import { searchItems } from "./actions";
 import SearchResults from "@/components/search-result";
+import { AlertCircle } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export const dynamic = "force-dynamic";
 
@@ -87,6 +88,13 @@ export default async function Page({
 								<h2 className="text-gray-500 mx-2 mb-4">
 									Hasil pencarian: {query}
 								</h2>
+								<Alert variant="destructive" className="my-6 bg-red-200">
+									<AlertCircle className="h-4 w-4" />
+									{/* <AlertTitle>Development Notice</AlertTitle> */}
+									<AlertDescription>
+										Fitur pencarian masih dalam pengembangan
+									</AlertDescription>
+								</Alert>
 								<SearchResults results={results} />
 							</div>
 						) : (
