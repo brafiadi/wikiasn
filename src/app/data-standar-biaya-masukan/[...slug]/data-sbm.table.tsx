@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import {
 	Table,
 	TableBody,
@@ -10,6 +10,13 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { formatRupiah } from "@/utils/currency";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from "jotai";
@@ -62,17 +69,33 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 	return (
 		<div className="space-y-4">
 			<div className="flex space-x-2 mx-4">
-				{kategori.map((item) => (
-					<Button
-						key={item}
-						className={`h-6 ${selectedCategory === item ? "bg-red-600" : "bg-red-300"}`}
-						onClick={() =>
-							setSelectedCategory(selectedCategory === item ? null : item)
-						}
-					>
-						{item}
-					</Button>
-				))}
+				<div className="hidden md:flex space-x-2">
+					{kategori.map((item) => (
+						<Button
+							key={item}
+							className={`h-6 ${selectedCategory === item ? "bg-red-600" : "bg-red-300"}`}
+							onClick={() =>
+								setSelectedCategory(selectedCategory === item ? null : item)
+							}
+						>
+							{item}
+						</Button>
+					))}
+				</div>
+				<div className="md:hidden ">
+					<Select onValueChange={(value) => setSelectedCategory(value)}>
+						<SelectTrigger className="min-w-[300px] text-gray-500">
+							<SelectValue placeholder="Pilih Kategori" />
+						</SelectTrigger>
+						<SelectContent>
+							{kategori.map((item) => (
+								<SelectItem key={item} value={item}>
+									{item}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+				</div>
 			</div>
 			<Table>
 				<TableCaption>...</TableCaption>
@@ -80,7 +103,10 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 					<TableRow>
 						<TableHead className="w-[50px]">No</TableHead>
 						{tableHeaders.map((header) => (
-							<TableHead key={header.key}> {String(header.label)}</TableHead>
+							<TableHead key={header.key} className="min-w-[100px]">
+								{" "}
+								{String(header.label)}
+							</TableHead>
 						))}
 					</TableRow>
 				</TableHeader>
@@ -114,7 +140,7 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 				</TableBody>
 			</Table>
 		</div>
-	)
-}
+	);
+};
 
-export default DataSBMTableClient
+export default DataSBMTableClient;
