@@ -1,8 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { AlertWrapper } from "@/components/alert-wrapper";
+import { WorkdayAlert, WorkdayAlertSkeleTon } from "@/components/workday-alert";
 
-export default function NotFound() {
+export default function Layout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
 			<div className="container mx-auto px-4">
@@ -26,21 +32,7 @@ export default function NotFound() {
 							className="mb-4"
 						/>
 
-						<div className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 max-w-2xl">
-							<div className="text-center">
-								<h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
-								<h2 className="text-3xl font-semibold text-gray-700 mb-6">
-									Halaman tidak ditemukan
-								</h2>
-								<p className="text-xl text-gray-600 mb-8">
-									Halaman yang Anda cari tidak ditemukan. Silakan cek kembali
-									URL yang Anda masukkan.
-								</p>
-								<Link href="/">
-									<Button>Kembali</Button>
-								</Link>
-							</div>
-						</div>
+						{children}
 					</div>
 				</main>
 			</div>
