@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -48,7 +49,7 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				{children}
+				<ScrollArea className="h-screen w-screen">{children}</ScrollArea>
 			</body>
 		</html>
 	);
