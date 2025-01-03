@@ -125,7 +125,7 @@ export default async function WikiAsnHomepage() {
 						</div>
 
 						<div className="mb-8 text-red-500 underline text-sm">
-							<Link href="/login">Masuk sebagai kontributor</Link>
+							<Link href="/login">Akses sebagai kontributor</Link>
 						</div>
 					</div>
 				</main>
