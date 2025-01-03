@@ -18,7 +18,7 @@ import SearchForm from "@/components/search.form";
 import { searchItems } from "./actions";
 import SearchResults from "@/components/search-result";
 import { AlertCircle } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export const dynamic = "force-dynamic";
 
@@ -101,7 +101,7 @@ export default async function Page({
 							<Suspense fallback={<CardLoading />}>
 								<Menu />
 								<div className="mb-8 text-red-500 underline text-sm">
-									<Link href="/login">Masuk sebagai kontributor</Link>
+									<Link href="/login">Akses sebagai kontributor</Link>
 								</div>
 							</Suspense>
 						)}{" "}

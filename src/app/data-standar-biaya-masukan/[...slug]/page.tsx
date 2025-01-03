@@ -122,7 +122,7 @@ export default async function Page({
 
 			<div className="bg-white px-0 md:px-20 py-4">
 				<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto">
-					<DataSBMTableClient data={data} kategori={kategori} />;
+					<DataSBMTableClient data={data} kategori={kategori} />
 				</div>
 			</div>
 		</div>
