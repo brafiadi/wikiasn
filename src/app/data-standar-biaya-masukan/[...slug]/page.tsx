@@ -2,7 +2,9 @@ import Link from "next/link";
 import { Suspense } from "react";
 import DataSBMTableClient from "./data-sbm.table";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+
+export const revalidate = 3600 // invalidate every hour
 
 const apiUrl = process.env.API_URL;
 

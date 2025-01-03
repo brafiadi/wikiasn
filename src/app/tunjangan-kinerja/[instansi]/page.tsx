@@ -18,9 +18,10 @@ interface TunjanganKinerja {
 	besaran: number;
 }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
-// or Dynamic metadata
+export const revalidate = 3600 // invalidate every hour
+
 export async function generateMetadata({
 	params,
 }: {

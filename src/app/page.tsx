@@ -20,7 +20,9 @@ import SearchResults from "@/components/search-result";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+
+export const revalidate = 3600 // invalidate every hour
 
 const apiUrl = process.env.API_URL;
 
