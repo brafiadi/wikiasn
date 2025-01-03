@@ -27,8 +27,8 @@ interface StandarBiayaMasukan {
 export default async function StandarBiayaMasukanTable() {
 	const data = await getListStandarBiayaMasukanData();
 
-	// const tahun = new Date().getFullYear();
-	const tahun = 2025;
+	const tahun = new Date().getFullYear();
+	// const tahun = 2025;
 
 	return (
 		<div className="min-h-[400px] rounded-lg bg-white  py-8">

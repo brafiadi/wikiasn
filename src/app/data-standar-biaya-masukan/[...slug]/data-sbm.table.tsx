@@ -61,19 +61,21 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 		.map(([key, value]) => ({ key, label: value }));
 
 	const filteredData = selectedCategory
-		? data.data.filter(
-				(row: SBMDataRow) => row.nama_kategori === selectedCategory,
-			)
-		: data.data;
+		? data.data
+				.filter((row: SBMDataRow) => row.nama_kategori === selectedCategory)
+				.sort((a, b) => a.id - b.id)
+		: data.data.sort((a, b) => a.id - b.id);
+
+	// console.log("filteredData", filteredData);
 
 	return (
 		<div className="space-y-4">
 			<div className="flex space-x-2 mx-4">
-				<div className="hidden md:flex space-x-2">
+				<div className="hidden md:flex flex-wrap  ">
 					{kategori.map((item) => (
 						<Button
 							key={item}
-							className={`h-6 ${selectedCategory === item ? "bg-red-600" : "bg-red-300"}`}
+							className={`h-6 m-1 ${selectedCategory === item ? "bg-red-600" : "bg-red-300"}`}
 							onClick={() =>
 								setSelectedCategory(selectedCategory === item ? null : item)
 							}
@@ -103,7 +105,7 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 					<TableRow>
 						<TableHead className="w-[50px]">No</TableHead>
 						{tableHeaders.map((header) => (
-							<TableHead key={header.key} className="min-w-[100px]">
+							<TableHead key={header.key} className="max-w-[250px]">
 								{" "}
 								{String(header.label)}
 							</TableHead>
@@ -115,7 +117,10 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 						<TableRow key={row.id}>
 							<TableCell>{index + 1}</TableCell>
 							{tableHeaders.map((header) => (
-								<TableCell key={header.key}>
+								<TableCell
+									key={header.key}
+									className="min-w-[150px] max-w-[250px]"
+								>
 									{header.key === "kolom_kategori"
 										? row.nama_kategori
 										: header.key === "kolom_uraian"
