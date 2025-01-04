@@ -46,7 +46,7 @@ function getMonthName(monthNumber: number) {
 }
 
 export default async function HolidayCalendar() {
-	const tahun = 2025;
+	const tahun = new Date().getFullYear();
 	const data = await getData(tahun);
 	if (!data) {
 		return <div>Loading...</div>;

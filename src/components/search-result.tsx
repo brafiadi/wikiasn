@@ -20,7 +20,7 @@ export default function SearchResults({
 					key={result.id}
 					className="bg-white p-4 rounded-md shadow hover:text-red-600"
 				>
-					<Link href={`/?cari=${result.query}`}>
+					<Link href={`/cari?q=${result.query}`}>
 						<h3 className="text-md font-semibold">{result.title}</h3>
 					</Link>
 				</li>

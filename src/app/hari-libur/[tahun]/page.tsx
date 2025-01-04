@@ -5,11 +5,11 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import Loader from "@/components/loader";
 
-// export const metadata: Metadata = {
-// 	title: "Hari Libur Nasional dan Cuti Bersama - WikiASN",
-// };
+export async function generateStaticParams() {
+	const params = [{ tahun: "2024" }, { tahun: "2025" }];
+	return params;
+}
 
-// or Dynamic metadata
 export async function generateMetadata({
 	params,
 }: {
@@ -22,7 +22,7 @@ export async function generateMetadata({
 }
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 3600 // invalidate every hour
+export const revalidate = 3600; // invalidate every hour
 
 export default async function Page({
 	params,
