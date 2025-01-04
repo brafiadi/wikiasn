@@ -8,6 +8,19 @@ export const revalidate = 3600; // invalidate every hour
 
 const apiUrl = process.env.API_URL;
 
+export async function generateStaticParams() {
+	const tahun = ["2025"];
+	const res = await fetch(`${apiUrl}/standar-biaya-masukan`);
+	const resData = await res.json();
+	const data = resData.data;
+	const params = tahun.flatMap((tahun) =>
+		data.map((item: { link: string }) => ({
+			slug: [item.link, tahun],
+		})),
+	);
+	return params;
+}
+
 const getDetailSBMData = async (sbm: string, tahun: string) => {
 	const res = await fetch(
 		`${apiUrl}/standar-biaya-masukan/data?sbm=${sbm}&tahun=${tahun}`,
