@@ -22,6 +22,17 @@ interface TunjanganKinerja {
 
 export const revalidate = 3600; // invalidate every hour
 
+export async function generateStaticParams() {
+	const apiUrl = process.env.API_URL;
+	const res = await fetch(`${apiUrl}/tunjangan-kinerja`);
+	const resData = await res.json();
+	const data = resData.data;
+	const params = data.map((item: { slug: string }) => ({
+		instansi: item.slug,
+	}));
+	return params;
+}
+
 export async function generateMetadata({
 	params,
 }: {
