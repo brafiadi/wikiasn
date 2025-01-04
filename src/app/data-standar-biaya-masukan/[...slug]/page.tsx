@@ -4,7 +4,7 @@ import DataSBMTableClient from "./data-sbm.table";
 
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 3600 // invalidate every hour
+export const revalidate = 3600; // invalidate every hour
 
 const apiUrl = process.env.API_URL;
 

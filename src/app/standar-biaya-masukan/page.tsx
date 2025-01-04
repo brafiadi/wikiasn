@@ -12,7 +12,7 @@ import {
 
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 3600 // invalidate every hour
+export const revalidate = 3600; // invalidate every hour
 
 export const metadata: Metadata = {
 	title: "Standar Biaya Masukan - WikiASN",

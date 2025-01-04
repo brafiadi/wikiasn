@@ -8,14 +8,14 @@ import { useSearchParams } from "next/navigation";
 
 export default function SearchForm() {
 	const searchParams = useSearchParams();
-	const query = searchParams.get("cari") || "";
+	const query = searchParams.get("q") || "";
 
 	return (
-		<Form action="/">
+		<Form action="/cari">
 			<div className="w-full max-w-2xl relative">
 				<Input
 					type="text"
-					name="cari"
+					name="q"
 					placeholder="Cari apa yang ingin kamu ketahui"
 					className="w-full pl-4 pr-12 py-6 text-sm md:text-md rounded-full border-gray-200 shadow-sm"
 					defaultValue={query}

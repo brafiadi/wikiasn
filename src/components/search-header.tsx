@@ -1,18 +1,15 @@
 "use client";
 
 import Form from "next/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 
 export default function SearchHeader() {
 	return (
-		<Form action="/">
+		<Form action="/cari">
 			<div className="relative">
 				<input
 					type="search"
-					name="cari"
+					name="q"
 					placeholder=""
 					className="w-full border-b outline-0 px-8 py-2 md:pr-10"
 				/>

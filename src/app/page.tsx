@@ -15,23 +15,16 @@ import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Loader, { MiniLoader } from "@/components/loader";
 import SearchForm from "@/components/search.form";
-import { searchItems } from "./actions";
-import SearchResults from "@/components/search-result";
-import { AlertCircle } from "lucide-react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 3600 // invalidate every hour
+export const revalidate = 3600; // invalidate every hour
 
 const apiUrl = process.env.API_URL;
 
 const getData = async () => {
 	const res = await fetch(`${apiUrl}/master-data/menu`);
 	const data = await res.json();
-
-	// Add a 3-second delay
-	// await new Promise((resolve) => setTimeout(resolve, 1000));
 
 	return data.data;
 };
@@ -44,20 +37,7 @@ interface MenuData {
 	aktif: boolean;
 }
 
-export default async function Page({
-	searchParams,
-}: {
-	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-	const query = (await searchParams).cari as string;
-	const results = query
-		? (await searchItems(query)).map(
-				(item: { id: number; title: string; link: string }) => ({
-					...item,
-					query,
-				}),
-			)
-		: [];
+export default async function Page() {
 	return (
 		<div className="min-h-screen bg-gray-50/50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white">
 			<div className="container mx-auto px-4">
@@ -83,30 +63,17 @@ export default async function Page({
 							className="mb-4"
 						/>
 						<div className="w-full max-w-2xl relative">
-							<SearchForm />
-						</div>
-						{query ? (
-							<div className="w-full max-w-2xl mt-2">
-								<h2 className="text-gray-500 mx-2 mb-4">
-									Hasil pencarian: {query}
-								</h2>
-								<Alert variant="destructive" className="my-6 bg-red-200">
-									<AlertCircle className="h-4 w-4" />
-									{/* <AlertTitle>Development Notice</AlertTitle> */}
-									<AlertDescription>
-										Fitur pencarian masih dalam pengembangan
-									</AlertDescription>
-								</Alert>
-								<SearchResults results={results} />
-							</div>
-						) : (
-							<Suspense fallback={<CardLoading />}>
-								<Menu />
-								<div className="mb-8 text-red-500 underline text-sm">
-									<Link href="/login">Akses sebagai kontributor</Link>
-								</div>
+							<Suspense fallback={null}>
+								<SearchForm />
 							</Suspense>
-						)}{" "}
+						</div>
+
+						<Suspense fallback={<CardLoading />}>
+							<Menu />
+							<div className="mb-8 text-red-500 underline text-sm">
+								<Link href="/login">Akses sebagai kontributor</Link>
+							</div>
+						</Suspense>
 					</div>
 				</main>
 			</div>
@@ -168,13 +135,6 @@ async function Menu() {
 function CardLoading() {
 	return (
 		<div className="my-8">
-			{/* <Card className="p-3 md:p-4 h-22 md:h-28">
-				<div className="flex flex-col gap-2 md:gap-4">
-
-				<Skeleton className="h-6 w-full" />
-				<Skeleton className="h-6 w-full" />
-				</div>
-			</Card> */}
 			<MiniLoader />
 		</div>
 	);
