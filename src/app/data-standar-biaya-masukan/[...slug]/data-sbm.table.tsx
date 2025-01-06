@@ -70,7 +70,7 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 
 	return (
 		<div className="space-y-4">
-			<div className="flex space-x-2 mx-4">
+			<div className="flex space-x-2 mx-2">
 				<div className="hidden md:flex flex-wrap  ">
 					{kategori.map((item) => (
 						<Button
