@@ -49,7 +49,7 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<ScrollArea className="h-screen w-screen">{children}</ScrollArea>
+				<ScrollArea className="h-screen">{children}</ScrollArea>
 			</body>
 		</html>
 	);
