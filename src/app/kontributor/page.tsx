@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { loginUser } from "@/lib/auth";
+import CheckContributorButton from "./cek-kontributor.button";
 
 export default async function Page() {
 	const session = await auth();
+	
 	return (
 		<>
 			<div className="flex w-full items-center justify-center px-4 ">
@@ -39,7 +42,7 @@ export default async function Page() {
 									</div>
 								</div>
 
-								<div className="flex flex-col gap-4">
+								<div className="flex flex-col gap-4 items-center">
 									<form
 										action={async () => {
 											"use server";
@@ -76,6 +79,10 @@ export default async function Page() {
 											Keluar
 										</Button>
 									</form>
+
+									{/* {session?.user?.email && (
+										<CheckContributorButton email={session.user.email} />
+									)} */}
 								</div>
 							</div>
 						</div>
