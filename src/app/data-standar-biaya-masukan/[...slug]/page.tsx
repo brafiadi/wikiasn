@@ -47,13 +47,13 @@ export async function generateMetadata({
 
 	const data = await getDetailSBMData(sbm, tahun);
 
-	if (!data || !data.data || data.data.length === 0) {
+	const judul = data.info.judul;
+
+	if (!judul) {
 		return {
 			title: "Data Standar Biaya Masukan - WikiASN",
 		};
 	}
-
-	const judul = data.data[0].judul;
 
 	return {
 		title: `Standar Biaya Masukan ${judul} Tahun Anggaran ${tahun} - WikiASN`,
@@ -95,9 +95,11 @@ export default async function Page({
 
 	const kategori = getUniqueCategories(data.data);
 
-	console.log(data.info);
+	// console.log(data);
 
 	const penjelasan = data.info.penjelasan;
+
+	const judul = data.info.judul;
 
 	// Tambahkan pengecekan data
 	if (!data || !data.data || data.data.length === 0) {
@@ -107,21 +109,30 @@ export default async function Page({
 					<div className="text-red-600 font-medium mb-2">
 						<Link href="/standar-biaya-masukan">Standar Biaya Masukan</Link>
 					</div>
-					<h1 className="text-xl md:text-3xl font-medium tracking-tight mb-2 md:mb-2 italic">
-						.....
-					</h1>
+					<Suspense fallback={<p>...</p>}>
+						<h1 className="text-3xl md:text-5xl font-medium tracking-tight mb-2 md:mb-2">
+							{judul}
+						</h1>
+						<h2 className="text-xl md:text-3xl font-medium tracking-tight mb-2 md:mb-2">
+							Tahun Anggaran {tahun}
+						</h2>
+					</Suspense>
 				</div>
 
 				<div className="bg-white px-0 md:px-20 py-4">
-					<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto text-gray-500">
-						<p>Data tidak ditemukan</p>
+					<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto">
+						{penjelasan ? (
+							<>
+								<PenjelasanSBM penjelasan={penjelasan as string} />
+								<Separator className="m-4" />
+							</>
+						) : null}
+						<p className="m-6 text-gray-500 italic">.....</p>
 					</div>
 				</div>
 			</div>
 		);
 	}
-
-	const judul = data.data[0].judul;
 
 	return (
 		<div className="container space-y-8 ">
