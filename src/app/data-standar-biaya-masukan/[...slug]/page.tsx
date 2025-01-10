@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import DataSBMTableClient from "./data-sbm.table";
+import { Separator } from "@/components/ui/separator";
+import PenjelasanSBM from "./penjelasan.section";
 
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 3600; // invalidate every hour
+export const revalidate = 1800; // invalidate
 
 const apiUrl = process.env.API_URL;
 
@@ -93,7 +95,9 @@ export default async function Page({
 
 	const kategori = getUniqueCategories(data.data);
 
-	// console.log(data)
+	console.log(data.info);
+
+	const penjelasan = data.info.penjelasan;
 
 	// Tambahkan pengecekan data
 	if (!data || !data.data || data.data.length === 0) {
@@ -137,7 +141,23 @@ export default async function Page({
 
 			<div className="bg-white px-0 md:px-20 py-4">
 				<div className="max-w-5xl mx-6 md:mx-auto py-4 my-auto">
+					{penjelasan ? (
+						<>
+							<PenjelasanSBM penjelasan={penjelasan as string} />
+							<Separator className="m-4" />
+						</>
+					) : null}
 					<DataSBMTableClient data={data} kategori={kategori} />
+					<div className="mb-8 rounded-lg bg-gray-100 p-4 m-4 h-fit">
+						<p className="text-sm font-semibold">Sumber:</p>
+						<Suspense fallback={<>...</>}>
+							<Link href={data.info.tautan} target="_blank">
+								<p className="text-sm hover:text-red-500">
+									{data.info.peraturan}
+								</p>
+							</Link>
+						</Suspense>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -70,12 +70,15 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 
 	return (
 		<div className="space-y-4">
+			<h4 className="m-4 text-xl font-semibold text-neutral-700">
+				Tabel Standar Biaya Masukan
+			</h4>
 			<div className="flex space-x-2 mx-2">
 				<div className="hidden md:flex flex-wrap  ">
 					{kategori.map((item) => (
 						<Button
 							key={item}
-							className={`h-6 m-1 ${selectedCategory === item ? "bg-red-600" : "bg-red-300"}`}
+							className={`h-5 m-1 px-2 ${selectedCategory === item ? "bg-red-600" : "bg-red-300"}`}
 							onClick={() =>
 								setSelectedCategory(selectedCategory === item ? null : item)
 							}
@@ -100,46 +103,48 @@ const DataSBMTableClient: React.FC<DataSBMTableClientProps> = ({
 				</div>
 			</div>
 			<Table>
-				<TableCaption>...</TableCaption>
 				<TableHeader>
 					<TableRow>
 						<TableHead className="w-[50px]">No</TableHead>
-						{tableHeaders.map((header) => (
-							<TableHead key={header.key} className="max-w-[250px]">
-								{" "}
-								{String(header.label)}
-							</TableHead>
-						))}
+						{tableHeaders.map((header) =>
+							header.key !== "kolom_kategori" || !selectedCategory ? (
+								<TableHead key={header.key} className="max-w-[250px]">
+									{String(header.label)}
+								</TableHead>
+							) : null,
+						)}
 					</TableRow>
 				</TableHeader>
 				<TableBody>
 					{filteredData.map((row: SBMDataRow, index: number) => (
 						<TableRow key={row.id}>
 							<TableCell>{index + 1}</TableCell>
-							{tableHeaders.map((header) => (
-								<TableCell
-									key={header.key}
-									className="min-w-[150px] max-w-[250px]"
-								>
-									{header.key === "kolom_kategori"
-										? row.nama_kategori
-										: header.key === "kolom_uraian"
-											? row.uraian
-											: header.key === "kolom_satuan"
-												? row.satuan || "-"
-												: header.key === "kolom_1"
-													? formatRupiah(row.nilai_1 ?? 0) || "-"
-													: header.key === "kolom_2"
-														? formatRupiah(row.nilai_2 ?? 0) || "-"
-														: header.key === "kolom_3"
-															? formatRupiah(row.nilai_3 ?? 0) || "-"
-															: header.key === "kolom_4"
-																? formatRupiah(row.nilai_4 ?? 0) || "-"
-																: header.key === "kolom_5"
-																	? formatRupiah(row.nilai_5 ?? 0) || "-"
-																	: "-"}
-								</TableCell>
-							))}
+							{tableHeaders.map((header) =>
+								header.key !== "kolom_kategori" || !selectedCategory ? (
+									<TableCell
+										key={header.key}
+										className="min-w-[150px] max-w-[250px]"
+									>
+										{header.key === "kolom_kategori"
+											? row.nama_kategori
+											: header.key === "kolom_uraian"
+												? row.uraian
+												: header.key === "kolom_satuan"
+													? row.satuan || "-"
+													: header.key === "kolom_1"
+														? formatRupiah(row.nilai_1 ?? 0) || "-"
+														: header.key === "kolom_2"
+															? formatRupiah(row.nilai_2 ?? 0) || "-"
+															: header.key === "kolom_3"
+																? formatRupiah(row.nilai_3 ?? 0) || "-"
+																: header.key === "kolom_4"
+																	? formatRupiah(row.nilai_4 ?? 0) || "-"
+																	: header.key === "kolom_5"
+																		? formatRupiah(row.nilai_5 ?? 0) || "-"
+																		: "-"}
+									</TableCell>
+								) : null,
+							)}
 						</TableRow>
 					))}
 				</TableBody>

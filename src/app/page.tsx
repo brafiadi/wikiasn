@@ -18,7 +18,7 @@ import SearchForm from "@/components/search.form";
 
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 3600; // invalidate every hour
+export const revalidate = 1800; // invalidate
 
 const apiUrl = process.env.API_URL;
 

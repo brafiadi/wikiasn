@@ -9,7 +9,7 @@ import CheckContributorButton from "./cek-kontributor.button";
 
 export default async function Page() {
 	const session = await auth();
-	
+
 	return (
 		<>
 			<div className="flex w-full items-center justify-center px-4 ">
