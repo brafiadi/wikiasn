@@ -22,7 +22,9 @@ export async function generateMetadata({
 }
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 1800; // invalidate
+export const revalidate = 3600 // invalidate every hour
+
+export const dynamicParams = true 
 
 export default async function Page({
 	params,
