@@ -9,7 +9,7 @@ export default function DelayedRedirect() {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			router.push("/dashboard");
-		}, 3000);
+		}, 1500);
 
 		return () => clearTimeout(timer);
 	}, [router]);
