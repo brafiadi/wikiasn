@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 3600 // invalidate every hour
+export const revalidate = 3600; // invalidate every hour
 
-export const dynamicParams = true 
+export const dynamicParams = true;
 
 export default function Page() {
 	return (

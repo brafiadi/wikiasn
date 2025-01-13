@@ -20,9 +20,9 @@ interface TunjanganKinerja {
 
 // export const dynamic = "force-dynamic";
 
-export const revalidate = 3600 // invalidate every hour
+export const revalidate = 3600; // invalidate every hour
 
-export const dynamicParams = true 
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
 	const apiUrl = process.env.API_URL;
