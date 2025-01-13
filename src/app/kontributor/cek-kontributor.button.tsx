@@ -4,15 +4,22 @@
 import { loginUser } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const CheckContributorButton = ({ email }: { email: string }) => {
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 
 	const checkContributor = async () => {
 		setLoading(true);
 		try {
 			if (email) {
-				await loginUser(email);
+				const response = await loginUser(email);
+				// console.log("Login response:", response);
+
+				if (response.success) {
+					router.push("/kontributor/dashboard");
+				}
 			}
 		} catch (error) {
 			console.error("Error checking contributor:", error);
@@ -23,7 +30,7 @@ const CheckContributorButton = ({ email }: { email: string }) => {
 
 	return (
 		<Button onClick={checkContributor} className="shadow-sm">
-			{loading ? "Checking..." : "Check Contributor"}
+			{loading ? "Loading..." : "Menuju Dashboard Kontributor"}
 		</Button>
 	);
 };
