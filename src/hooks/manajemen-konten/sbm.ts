@@ -11,6 +11,6 @@ export const useGetListSBM = () => {
 export const useGetDetailSBM = (sbm: string, tahun: string) => {
 	return useQuery({
 		queryKey: [`sbm-${sbm}-${tahun}`],
-		queryFn: () => sbmApi.getDetail(sbm, tahun)
-	})
-}
+		queryFn: () => sbmApi.getDetail(sbm, tahun),
+	});
+};

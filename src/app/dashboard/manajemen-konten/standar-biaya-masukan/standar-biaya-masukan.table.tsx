@@ -31,9 +31,8 @@ interface StandarBiayaMasukan {
 }
 
 export default function StandarBiayaMasukanTable() {
-	// const data = await getListStandarBiayaMasukanData();
-
 	const { data, isLoading } = useGetListSBM();
+	const router = useRouter();
 
 	const tahun = new Date().getFullYear();
 	// const tahun = 2025;
@@ -46,11 +45,9 @@ export default function StandarBiayaMasukanTable() {
 
 	// console.log(sbmData)
 
-	 const router = useRouter();
-
-  const handleNavigation = (link: string) => {
-    router.push(`standar-biaya-masukan/edit?data=${link}`); // Navigasi ke halaman lain tanpa reload server
-  };
+	const handleNavigation = (link: string) => {
+		router.push(`standar-biaya-masukan/edit?data=${link}`); // Navigasi ke halaman lain tanpa reload server
+	};
 
 	return (
 		<div className="rounded-lg bg-white ">
@@ -72,12 +69,12 @@ export default function StandarBiayaMasukanTable() {
 									{index + 1}
 								</TableCell>
 								<TableCell>
-								
-
 									<p
-									onClick={() => handleNavigation(item.link)}
-									onKeyUp={(e) => e.key === 'Enter' && handleNavigation(item.link)}
-									className="hover:text-red-600"
+										onClick={() => handleNavigation(item.link)}
+										onKeyUp={(e) =>
+											e.key === "Enter" && handleNavigation(item.link)
+										}
+										className="hover:text-red-600"
 									>
 										{item.judul}
 									</p>
