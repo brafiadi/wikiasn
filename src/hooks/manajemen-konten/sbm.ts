@@ -7,3 +7,10 @@ export const useGetListSBM = () => {
 		queryFn: () => sbmApi.getAll(),
 	});
 };
+
+export const useGetDetailSBM = (sbm: string, tahun: string) => {
+	return useQuery({
+		queryKey: [`sbm-${sbm}-${tahun}`],
+		queryFn: () => sbmApi.getDetail(sbm, tahun)
+	})
+}

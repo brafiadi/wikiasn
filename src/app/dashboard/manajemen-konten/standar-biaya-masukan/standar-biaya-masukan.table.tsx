@@ -12,6 +12,8 @@ import {
 import Link from "next/link";
 import { useGetListSBM } from "@/hooks/manajemen-konten/sbm";
 import { TableSkeleton } from "@/components/table-skeleton";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const apiUrl = process.env.API_URL;
 
@@ -44,6 +46,12 @@ export default function StandarBiayaMasukanTable() {
 
 	// console.log(sbmData)
 
+	 const router = useRouter();
+
+  const handleNavigation = (link: string) => {
+    router.push(`standar-biaya-masukan/edit?data=${link}`); // Navigasi ke halaman lain tanpa reload server
+  };
+
 	return (
 		<div className="rounded-lg bg-white ">
 			<Table>
@@ -64,12 +72,15 @@ export default function StandarBiayaMasukanTable() {
 									{index + 1}
 								</TableCell>
 								<TableCell>
-									<Link
-										href={`standar-biaya-masukan/${item.link}`}
-										className="hover:text-red-600"
+								
+
+									<p
+									onClick={() => handleNavigation(item.link)}
+									onKeyUp={(e) => e.key === 'Enter' && handleNavigation(item.link)}
+									className="hover:text-red-600"
 									>
 										{item.judul}
-									</Link>
+									</p>
 								</TableCell>
 								<TableCell className="w-[200px]">{item.jenis}</TableCell>
 							</TableRow>
