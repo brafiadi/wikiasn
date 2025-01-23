@@ -32,7 +32,7 @@ const data = {
 		},
 		{
 			title: "Manajemen Konten",
-			// url: "/dashboard/konten",
+			url: "/dashboard/manajemen-konten",
 			icon: BookOpen,
 			items: [
 				{
@@ -41,11 +41,11 @@ const data = {
 				},
 				{
 					title: "Peraturan",
-					url: "#",
+					url: "/dashboard/manajemen-konten/peraturan",
 				},
 				{
 					title: "Tunjangan Kinerja",
-					url: "#",
+					url: "/dashboard/manajemen-konten/tunjangan-kinerja",
 				},
 			],
 		},
