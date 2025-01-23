@@ -1,7 +1,5 @@
 "use client";
-
 import { ChevronRight, type LucideIcon } from "lucide-react";
-
 import {
 	Collapsible,
 	CollapsibleContent,
@@ -19,6 +17,8 @@ import {
 	SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 export function NavMain({
 	items,
@@ -34,6 +34,10 @@ export function NavMain({
 		}[];
 	}[];
 }) {
+	const router = useRouter();
+	const handleNavigation = (url: string) => {
+		router.push(url);
+	};
 	return (
 		<SidebarGroup>
 			<SidebarGroupLabel>Menu Kontributor</SidebarGroupLabel>
@@ -43,18 +47,21 @@ export function NavMain({
 						<SidebarMenuItem>
 							{item.url ? (
 								<SidebarMenuButton asChild tooltip={item.title}>
-									<Link href={item.url}>
+									<button
+										type="button"
+										onClick={() => item.url && handleNavigation(item.url)}
+									>
 										<item.icon />
 										<span>{item.title}</span>
-									</Link>
+									</button>
 								</SidebarMenuButton>
 							) : (
 								<>
 									<SidebarMenuButton asChild tooltip={item.title}>
-										<Link href="#">
+										<button type="button">
 											<item.icon />
 											<span>{item.title}</span>
-										</Link>
+										</button>
 									</SidebarMenuButton>
 
 									{item.items?.length ? (
@@ -70,9 +77,14 @@ export function NavMain({
 													{item.items?.map((subItem) => (
 														<SidebarMenuSubItem key={subItem.title}>
 															<SidebarMenuSubButton asChild>
-																<Link href={subItem.url}>
+																<button
+																	type="button"
+																	onClick={() =>
+																		subItem.url && handleNavigation(subItem.url)
+																	}
+																>
 																	<span>{subItem.title}</span>
-																</Link>
+																</button>
 															</SidebarMenuSubButton>
 														</SidebarMenuSubItem>
 													))}
