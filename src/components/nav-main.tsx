@@ -17,8 +17,7 @@ import {
 	SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
+import { useRouter, usePathname } from "next/navigation";
 
 export function NavMain({
 	items,
@@ -35,9 +34,11 @@ export function NavMain({
 	}[];
 }) {
 	const router = useRouter();
+	const pathname = usePathname();
 	const handleNavigation = (url: string) => {
 		router.push(url);
 	};
+	// console.log('path', pathname)
 	return (
 		<SidebarGroup>
 			<SidebarGroupLabel>Menu Kontributor</SidebarGroupLabel>
@@ -45,11 +46,16 @@ export function NavMain({
 				{items.map((item) => (
 					<Collapsible key={item.title} asChild defaultOpen>
 						<SidebarMenuItem>
-							{item.url ? (
+							{!item.items || item.items.length === 0 ? (
 								<SidebarMenuButton asChild tooltip={item.title}>
 									<button
 										type="button"
 										onClick={() => item.url && handleNavigation(item.url)}
+										className={
+											pathname === item.url
+												? "bg-white border font-semibold shadow-sm"
+												: "text-neutral-500"
+										}
 									>
 										<item.icon />
 										<span>{item.title}</span>
@@ -58,7 +64,19 @@ export function NavMain({
 							) : (
 								<>
 									<SidebarMenuButton asChild tooltip={item.title}>
-										<button type="button">
+										<button
+											type="button"
+											onClick={() =>
+												item.items &&
+												item.items.length > 0 &&
+												handleNavigation(item.items[0].url)
+											}
+											className={
+												pathname.includes(item.url ?? "")
+													? "bg-white border font-semibold shadow-sm"
+													: "text-neutral-500"
+											}
+										>
 											<item.icon />
 											<span>{item.title}</span>
 										</button>
@@ -73,14 +91,19 @@ export function NavMain({
 												</SidebarMenuAction>
 											</CollapsibleTrigger>
 											<CollapsibleContent>
-												<SidebarMenuSub>
+												<SidebarMenuSub className="mt-1">
 													{item.items?.map((subItem) => (
 														<SidebarMenuSubItem key={subItem.title}>
-															<SidebarMenuSubButton asChild>
+															<SidebarMenuSubButton asChild className="w-full">
 																<button
 																	type="button"
 																	onClick={() =>
 																		subItem.url && handleNavigation(subItem.url)
+																	}
+																	className={
+																		pathname.includes(subItem.url ?? "")
+																			? "bg-gray-200"
+																			: "text-neutral-500"
 																	}
 																>
 																	<span>{subItem.title}</span>
