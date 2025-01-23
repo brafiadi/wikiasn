@@ -69,15 +69,17 @@ export default function StandarBiayaMasukanTable() {
 									{index + 1}
 								</TableCell>
 								<TableCell>
-									<p
-										onClick={() => handleNavigation(item.link)}
-										onKeyUp={(e) =>
-											e.key === "Enter" && handleNavigation(item.link)
-										}
-										className="hover:text-red-600"
-									>
-										{item.judul}
-									</p>
+									<button type="button" className="text-left">
+										<p
+											onClick={() => handleNavigation(item.link)}
+											onKeyUp={(e) =>
+												e.key === "Enter" && handleNavigation(item.link)
+											}
+											className="hover:text-red-600"
+										>
+											{item.judul}
+										</p>
+									</button>
 								</TableCell>
 								<TableCell className="w-[200px]">{item.jenis}</TableCell>
 							</TableRow>

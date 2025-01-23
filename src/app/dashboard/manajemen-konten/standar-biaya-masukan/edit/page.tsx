@@ -4,8 +4,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useGetDetailSBM, useGetListSBM } from "@/hooks/manajemen-konten/sbm";
+import { useGetDetailSBM } from "@/hooks/manajemen-konten/sbm";
 import { atom, useAtom } from "jotai";
+import SBMPenjelasanSection from "./sbm-penjelasan.section";
+import SBMDataTable from "./sbm-data.table";
 
 // const apiUrl = process.env.API_URL;
 
@@ -61,13 +63,17 @@ export default function Page() {
 			</div>
 			<div className="pt-2">
 				<Tabs defaultValue="penjelasan">
-					<TabsList className="">
+					<TabsList className="mb-4">
 						<TabsTrigger value="penjelasan">Penjelasan</TabsTrigger>
 						<TabsTrigger value="data">Data</TabsTrigger>
 					</TabsList>
 
-					<TabsContent value="penjelasan">1</TabsContent>
-					<TabsContent value="data">2</TabsContent>
+					<TabsContent value="penjelasan">
+						<SBMPenjelasanSection tahun={tahun} sbm={sbm || ""} />
+					</TabsContent>
+					<TabsContent value="data">
+						<SBMDataTable tahun={tahun} sbm={sbm || ""} />
+					</TabsContent>
 				</Tabs>
 			</div>
 		</div>
