@@ -8,6 +8,8 @@ import { loginUser } from "@/lib/auth";
 import CheckContributorButton from "./cek-kontributor.button";
 import { LoaderWithCountdown, MiniLoader } from "@/components/loader";
 import DelayedRedirect from "@/components/delayed-redirect";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function Page() {
 	const session = await auth();
@@ -42,7 +44,7 @@ export default async function Page() {
 	}
 
 	return (
-		<>
+		<Suspense fallback={<Loading />}>
 			<div className="flex w-full items-center justify-center px-4 ">
 				{!session?.user ? (
 					<LoginForm />
@@ -85,7 +87,7 @@ export default async function Page() {
 					</div>
 				)}
 			</div>
-		</>
+		</Suspense>
 	);
 }
 
@@ -127,5 +129,17 @@ function SignOutButton() {
 				Keluar
 			</Button>
 		</form>
+	);
+}
+
+function Loading() {
+	return (
+		<div>
+			<div className="flex flex-col items-center justify-center p-2 h-[200px]">
+				<div className="relative w-8 h-8">
+					<div className="absolute inset-0 border-[3px] border-red-500 rounded-full border-t-transparent animate-spin" />
+				</div>
+			</div>
+		</div>
 	);
 }

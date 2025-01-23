@@ -1,22 +1,7 @@
 "use client";
-
 import type * as React from "react";
-import {
-	BookOpen,
-	Bot,
-	Command,
-	Frame,
-	LayoutDashboard,
-	LifeBuoy,
-	PieChart,
-	Send,
-	Settings2,
-	SquareTerminal,
-} from "lucide-react";
-
+import { BookOpen, LayoutDashboard } from "lucide-react";
 import { NavMain } from "@/components/nav-main";
-import { NavProjects } from "@/components/nav-projects";
-import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
 	Sidebar,
@@ -29,7 +14,9 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Button } from "./ui/button";
 
 const data = {
 	user: {
@@ -62,62 +49,21 @@ const data = {
 				},
 			],
 		},
-		// {
-		// 	title: "Documentation",
-		// 	url: "#",
-		// 	icon: BookOpen,
-		// 	items: [
-		// 		{
-		// 			title: "Introduction",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Get Started",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Tutorials",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Changelog",
-		// 			url: "#",
-		// 		},
-		// 	],
-		// },
-		// {
-		// 	title: "Settings",
-		// 	url: "#",
-		// 	icon: Settings2,
-		// 	items: [
-		// 		{
-		// 			title: "General",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Team",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Billing",
-		// 			url: "#",
-		// 		},
-		// 		{
-		// 			title: "Limits",
-		// 			url: "#",
-		// 		},
-		// 	],
-		// },
 	],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const { data: session } = useSession();
+	const router = useRouter();
 
 	const user = {
 		name: session?.user?.name || "",
 		email: session?.user?.email || "",
 		avatar: session?.user?.image || "",
+	};
+
+	const handleNavigation = (url: string) => {
+		router.push(url);
 	};
 
 	return (
@@ -126,7 +72,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarMenuButton size="lg" asChild>
-							<Link href="/">
+							<Button variant={"ghost"} onClick={() => handleNavigation("/")}>
 								<div className="flex aspect-square size-8 items-center justify-center ">
 									<Image src="/favicon.svg" width={64} height={64} alt="logo" />
 								</div>
@@ -136,7 +82,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 									</span>
 									<span className="truncate text-xs">Enskilopedia ASN</span>
 								</div>
-							</Link>
+							</Button>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>

@@ -43,7 +43,7 @@ export function LoaderWithCountdown() {
 					{/* Track */}
 					{/* <div className="absolute inset-0 border-[16px] border-[#E8EFFF] rounded-full"></div> */}
 					{/* Spinner */}
-					<div className="absolute inset-0 border-[4px] border-red-500 rounded-full border-t-transparent animate-spin"></div>
+					<div className="absolute inset-0 border-[4px] border-red-500 rounded-full border-t-transparent animate-spin" />
 				</div>
 			</div>
 		</div>
