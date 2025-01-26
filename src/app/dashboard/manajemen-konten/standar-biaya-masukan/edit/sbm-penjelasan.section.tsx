@@ -27,7 +27,7 @@ export default function SBMPenjelasanSection({
 				<CardContent>
 					<div className="flex justify-between">
 						<h5 className="font-semibold">Penjelasan SBM</h5>
-						<TambahPenjelasan />
+						{sbmInfo.penjelasan.length < 1 && <TambahPenjelasan />}
 					</div>
 					<ScrollArea
 						className={`h-[${Math.min(sbmInfo.penjelasan.length / 4, 50)}vh]`}

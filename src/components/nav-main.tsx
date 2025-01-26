@@ -106,7 +106,7 @@ export function NavMain({
 																			: "text-neutral-400"
 																	}
 																>
-																	<span>{subItem.title}</span>
+																	<span>{subItem.title}oo</span>
 																</button>
 															</SidebarMenuSubButton>
 														</SidebarMenuSubItem>
