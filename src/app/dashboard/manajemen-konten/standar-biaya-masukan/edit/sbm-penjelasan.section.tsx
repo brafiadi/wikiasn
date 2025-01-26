@@ -3,6 +3,7 @@ import { atom, useAtom } from "jotai";
 import { useGetDetailSBM } from "@/hooks/manajemen-konten/sbm";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import TambahPenjelasan from "./tambah-penjelasan";
 
 interface SBMPenjelasanSectionProps {
 	tahun: string;
@@ -24,7 +25,10 @@ export default function SBMPenjelasanSection({
 			<Card className="shadow-md col-span-3 p-2">
 				<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-0" />
 				<CardContent>
-					<h5 className="font-semibold">Penjelasan SBM</h5>
+					<div className="flex justify-between">
+						<h5 className="font-semibold">Penjelasan SBM</h5>
+						<TambahPenjelasan />
+					</div>
 					<ScrollArea
 						className={`h-[${Math.min(sbmInfo.penjelasan.length / 4, 50)}vh]`}
 					>
