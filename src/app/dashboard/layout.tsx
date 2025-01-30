@@ -18,6 +18,7 @@ import { auth } from "../../../auth";
 import { loginUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const metadata: Metadata = {
 	title: "Dashboard Kontributor - WikiASN",
@@ -50,7 +51,7 @@ export default async function Layout({
 					</header>
 					<div className="flex flex-1 flex-col gap-4 p-4 pt-0">
 						<div className="min-h-[100vh] flex-1 rounded-xl md:min-h-min text-neutral-700">
-							{children}
+							<ScrollArea className="h-[88vh]">{children}</ScrollArea>
 						</div>
 					</div>
 				</SidebarInset>

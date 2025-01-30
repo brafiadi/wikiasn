@@ -1,8 +1,7 @@
 "use client";
-import { atom, useAtom } from "jotai";
-import { useGetDetailSBM } from "@/hooks/manajemen-konten/sbm";
+import { useSBM } from "@/hooks/manajemen-konten/sbm";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import TambahPenjelasan from "./tambah-penjelasan";
 
 interface SBMPenjelasanSectionProps {
 	tahun: string;
@@ -13,7 +12,8 @@ export default function SBMPenjelasanSection({
 	tahun,
 	sbm,
 }: SBMPenjelasanSectionProps) {
-	const { data, isLoading } = useGetDetailSBM(sbm || "", tahun);
+	const sb = useSBM();
+	const { data } = sb.getDetail(sbm || "", tahun);
 
 	const sbmInfo = data?.data.info;
 
@@ -24,12 +24,13 @@ export default function SBMPenjelasanSection({
 			<Card className="shadow-md col-span-3 p-2">
 				<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-0" />
 				<CardContent>
-					<h5 className="font-semibold">Penjelasan SBM</h5>
-					<ScrollArea
-						className={`h-[${Math.min(sbmInfo.penjelasan.length / 4, 50)}vh]`}
-					>
-						<PenjelasanSBM penjelasan={sbmInfo.penjelasan} />
-					</ScrollArea>
+					<div className="flex justify-between">
+						<h5 className="font-semibold">Penjelasan SBM</h5>
+						{sbmInfo.penjelasan.length < 1 && (
+							<TambahPenjelasan tahun={tahun} sbmId={sbmInfo.id} />
+						)}
+					</div>
+					<PenjelasanSBM penjelasan={sbmInfo.penjelasan} />
 				</CardContent>
 			</Card>
 			<Card className="shadow-md p-2 h-fit">

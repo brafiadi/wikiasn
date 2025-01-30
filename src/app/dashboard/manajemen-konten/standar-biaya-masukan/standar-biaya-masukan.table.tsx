@@ -3,25 +3,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import {
 	Table,
 	TableBody,
-	TableCaption,
 	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import Link from "next/link";
-import { useGetListSBM } from "@/hooks/manajemen-konten/sbm";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-
-const apiUrl = process.env.API_URL;
-
-const getListStandarBiayaMasukanData = async () => {
-	const res = await fetch(`${apiUrl}/standar-biaya-masukan`);
-	const data = await res.json();
-	return data.data;
-};
+import { useSBM } from "@/hooks/manajemen-konten/sbm";
 
 interface StandarBiayaMasukan {
 	id: number;
@@ -31,10 +20,10 @@ interface StandarBiayaMasukan {
 }
 
 export default function StandarBiayaMasukanTable() {
-	const { data, isLoading } = useGetListSBM();
+	const sbm = useSBM();
+	const { data, isLoading } = sbm.getList();
 	const router = useRouter();
 
-	const tahun = new Date().getFullYear();
 	// const tahun = 2025;
 
 	if (isLoading) {

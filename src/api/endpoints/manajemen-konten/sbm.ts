@@ -1,14 +1,15 @@
 import api from "@/api/axios";
 
-interface StandarBiayaMasukan {
+interface AddPenjelasanPayload {
+	tahun: string;
 	id: number;
-	judul: string;
-	jenis: string;
-	link: string;
+	penjelasan: string;
 }
 
 export const sbmApi = {
 	getAll: () => api.get("/standar-biaya-masukan"),
 	getDetail: (sbm: string, tahun: string) =>
 		api.get(`/standar-biaya-masukan/data?sbm=${sbm}&tahun=${tahun}`),
+	addPenjelasan: (data: AddPenjelasanPayload) =>
+		api.post("/standar-biaya-masukan/penjelasan", data),
 };

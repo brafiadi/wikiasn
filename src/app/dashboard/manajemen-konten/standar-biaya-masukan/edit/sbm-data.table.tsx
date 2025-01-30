@@ -1,16 +1,6 @@
 "use client";
-import { atom, useAtom } from "jotai";
-import { useGetDetailSBM } from "@/hooks/manajemen-konten/sbm";
+import { useSBM } from "@/hooks/manajemen-konten/sbm";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import {
-	Table,
-	TableBody,
-	TableCaption,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
 
 interface SBMDataTableProprs {
 	tahun: string;
@@ -18,7 +8,8 @@ interface SBMDataTableProprs {
 }
 
 export default function SBMDataTable({ tahun, sbm }: SBMDataTableProprs) {
-	const { data, isLoading } = useGetDetailSBM(sbm || "", tahun);
+	const sb = useSBM();
+	const { data } = sb.getDetail(sbm || "", tahun);
 
 	const sbmData = data?.data.data;
 
