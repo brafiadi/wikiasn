@@ -103,7 +103,7 @@ export function NavMain({
 																	className={
 																		pathname.includes(subItem.url ?? "")
 																			? "bg-gray-100"
-																			: "text-neutral-400"
+																			: "text-neutral-400/70"
 																	}
 																>
 																	<span>{subItem.title}</span>

@@ -4,8 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useGetDetailSBM } from "@/hooks/manajemen-konten/sbm";
 import { atom, useAtom } from "jotai";
+import { useSBM } from "@/hooks/manajemen-konten/sbm";
 import SBMPenjelasanSection from "./sbm-penjelasan.section";
 import SBMDataTable from "./sbm-data.table";
 
@@ -25,13 +25,15 @@ export default function Page() {
 	const router = useRouter();
 
 	const searchParams = useSearchParams();
-	const sbm = searchParams.get("data");
+	const sbmParams = searchParams.get("data");
 
 	const [tahun, setTahun] = useAtom(tahunAtom);
 
 	// console.log(sbm, tahun);
 
-	const { data, isLoading } = useGetDetailSBM(sbm || "", tahun);
+	const sbm = useSBM();
+
+	const { data, isLoading } = sbm.getDetail(sbmParams || "", tahun);
 	const sbmInfo = data?.data.info;
 
 	// console.log(sbmInfo)
@@ -69,10 +71,10 @@ export default function Page() {
 					</TabsList>
 
 					<TabsContent value="penjelasan">
-						<SBMPenjelasanSection tahun={tahun} sbm={sbm || ""} />
+						<SBMPenjelasanSection tahun={tahun} sbm={sbmParams || ""} />
 					</TabsContent>
 					<TabsContent value="data">
-						<SBMDataTable tahun={tahun} sbm={sbm || ""} />
+						<SBMDataTable tahun={tahun} sbm={sbmParams || ""} />
 					</TabsContent>
 				</Tabs>
 			</div>

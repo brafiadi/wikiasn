@@ -1,8 +1,6 @@
 "use client";
-import { atom, useAtom } from "jotai";
-import { useGetDetailSBM } from "@/hooks/manajemen-konten/sbm";
+import { useSBM } from "@/hooks/manajemen-konten/sbm";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import TambahPenjelasan from "./tambah-penjelasan";
 
 interface SBMPenjelasanSectionProps {
@@ -14,7 +12,8 @@ export default function SBMPenjelasanSection({
 	tahun,
 	sbm,
 }: SBMPenjelasanSectionProps) {
-	const { data, isLoading } = useGetDetailSBM(sbm || "", tahun);
+	const sb = useSBM();
+	const { data } = sb.getDetail(sbm || "", tahun);
 
 	const sbmInfo = data?.data.info;
 
@@ -31,11 +30,7 @@ export default function SBMPenjelasanSection({
 							<TambahPenjelasan tahun={tahun} sbmId={sbmInfo.id} />
 						)}
 					</div>
-					<ScrollArea
-						className={`h-[${Math.min(sbmInfo.penjelasan.length / 4, 50)}vh]`}
-					>
-						<PenjelasanSBM penjelasan={sbmInfo.penjelasan} />
-					</ScrollArea>
+					<PenjelasanSBM penjelasan={sbmInfo.penjelasan} />
 				</CardContent>
 			</Card>
 			<Card className="shadow-md p-2 h-fit">
