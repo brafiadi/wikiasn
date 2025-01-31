@@ -2,6 +2,7 @@
 import { useSBM } from "@/hooks/manajemen-konten/sbm";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import TambahPenjelasan from "./tambah-penjelasan";
+import EditPenjelasan from "./edit-penjelasan";
 
 interface SBMPenjelasanSectionProps {
 	tahun: string;
@@ -26,8 +27,10 @@ export default function SBMPenjelasanSection({
 				<CardContent>
 					<div className="flex justify-between">
 						<h5 className="font-semibold">Penjelasan SBM</h5>
-						{sbmInfo.penjelasan.length < 1 && (
+						{sbmInfo.penjelasan.length < 1 ? (
 							<TambahPenjelasan tahun={tahun} sbmId={sbmInfo.id} />
+						) : (
+							<EditPenjelasan />
 						)}
 					</div>
 					<PenjelasanSBM penjelasan={sbmInfo.penjelasan} />

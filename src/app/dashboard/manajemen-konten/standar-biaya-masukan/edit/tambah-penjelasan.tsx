@@ -22,6 +22,11 @@ import {
 } from "@/components/ui/form";
 import { useState } from "react";
 import { useSBM } from "@/hooks/manajemen-konten/sbm";
+import {
+	TooltipTrigger,
+	Tooltip,
+	TooltipContent,
+} from "@/components/ui/tooltip";
 
 interface TambahPenjelasanProps {
 	tahun: string;
@@ -65,7 +70,12 @@ export default function TambahPenjelasan({
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Button variant="outline" size="sm">
-					<Plus />
+					<Tooltip>
+						<TooltipTrigger>
+							<Plus />
+						</TooltipTrigger>
+						<TooltipContent>Tambah data penjelasan</TooltipContent>
+					</Tooltip>
 				</Button>
 			</DialogTrigger>
 			<DialogContent>
