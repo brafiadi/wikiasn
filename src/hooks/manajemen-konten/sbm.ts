@@ -8,6 +8,10 @@ interface AddPenjelasanPayload {
 	penjelasan: string;
 }
 
+interface UpdatePenjelasanPayload {
+	penjelasan: string;
+}
+
 export const useSBM = () => {
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
@@ -52,9 +56,36 @@ export const useSBM = () => {
 		});
 	};
 
+	const updatePenjelasan = (id: number) => {
+		return useMutation({
+			mutationKey: [`update-penjelasan-sbm-${id}`],
+			mutationFn: (payload: UpdatePenjelasanPayload) =>
+				sbmApi.updatePenjelasan(id, payload),
+			onSuccess: () => {
+				toast({
+					title: "Sukses",
+					description: "Data penjelasan berhasil diperbarui",
+				});
+				queryClient.invalidateQueries({
+					predicate: (query) => {
+						return query.queryKey.some((key) => String(key).includes("sbm"));
+					},
+				});
+			},
+			onError: (error) => {
+				toast({
+					title: "Gagal",
+					description: "Gagal memperbarui data penjelasan",
+				});
+				console.error(error);
+			},
+		});
+	};
+
 	return {
 		getList,
 		getDetail,
 		addPenjelasan,
+		updatePenjelasan,
 	};
 };
