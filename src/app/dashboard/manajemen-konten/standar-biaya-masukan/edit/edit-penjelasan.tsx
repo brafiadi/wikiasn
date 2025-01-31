@@ -29,9 +29,9 @@ export default function EditPenjelasan({
 
 	// console.log(id, penjelasan);
 	//
-	const { mutate: updatePenjelasan, isLoading } = useSBM().updatePenjelasan(id);
+	const { mutate: updatePenjelasan } = useSBM().updatePenjelasan(id);
 
-	const handleSave = (content: string) => {
+	const handleSave = async (content: string): Promise<void> => {
 		const data = {
 			penjelasan: content,
 		};
