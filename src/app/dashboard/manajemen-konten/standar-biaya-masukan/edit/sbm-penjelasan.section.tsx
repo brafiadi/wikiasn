@@ -30,7 +30,7 @@ export default function SBMPenjelasanSection({
 						{sbmInfo.penjelasan.length < 1 ? (
 							<TambahPenjelasan tahun={tahun} sbmId={sbmInfo.id} />
 						) : (
-							<EditPenjelasan />
+							<EditPenjelasan id={sbmInfo.id} penjelasan={sbmInfo.penjelasan} />
 						)}
 					</div>
 					<PenjelasanSBM penjelasan={sbmInfo.penjelasan} />

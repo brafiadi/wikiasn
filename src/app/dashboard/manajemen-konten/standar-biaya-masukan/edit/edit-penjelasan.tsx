@@ -1,3 +1,4 @@
+import TipTapEditor from "@/components/tiptap-editor";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -14,11 +15,26 @@ import {
 import { SquarePenIcon } from "lucide-react";
 import { useState } from "react";
 
-export default function EditPenjelasan() {
+interface EditPenjelasanProps {
+	id: number;
+	penjelasan: string;
+}
+
+export default function EditPenjelasan({
+	id,
+	penjelasan,
+}: EditPenjelasanProps) {
 	const [open, setOpen] = useState(false);
 
+	console.log(id, penjelasan);
+
+	const handleSave = (content: string) => {
+		console.log(content);
+		setOpen(false);
+	};
+
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Button variant={"outline"} size={"sm"}>
 					<Tooltip>
@@ -29,10 +45,14 @@ export default function EditPenjelasan() {
 					</Tooltip>
 				</Button>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent className="max-w-[1000px] w-[90vw] max-h-[90vh] flex flex-col">
 				<DialogHeader>
 					<DialogTitle>Edit Penjelasan</DialogTitle>
 				</DialogHeader>
+				<div className="flex-1 min-h-0">
+					{" "}
+					<TipTapEditor onSave={handleSave} initialContent={penjelasan} />
+				</div>
 			</DialogContent>
 		</Dialog>
 	);
