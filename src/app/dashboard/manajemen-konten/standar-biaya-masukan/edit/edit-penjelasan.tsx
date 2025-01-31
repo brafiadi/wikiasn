@@ -12,6 +12,7 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useSBM } from "@/hooks/manajemen-konten/sbm";
 import { SquarePenIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -26,10 +27,15 @@ export default function EditPenjelasan({
 }: EditPenjelasanProps) {
 	const [open, setOpen] = useState(false);
 
-	console.log(id, penjelasan);
+	// console.log(id, penjelasan);
+	//
+	const { mutate: updatePenjelasan, isLoading } = useSBM().updatePenjelasan(id);
 
 	const handleSave = (content: string) => {
-		console.log(content);
+		const data = {
+			penjelasan: content,
+		};
+		updatePenjelasan(data);
 		setOpen(false);
 	};
 
