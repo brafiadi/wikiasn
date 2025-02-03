@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import { Bold, Italic, List, ListOrdered, Heading2 } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";
+import BulletList from "@tiptap/extension-bullet-list";
+import OrderedList from "@tiptap/extension-ordered-list";
+import ListItem from "@tiptap/extension-list-item";
 
 interface TipTapEditorProps {
 	onSave?: (content: string) => Promise<void>;
@@ -79,7 +82,24 @@ const TipTapEditor = ({
 	editable = true,
 }: TipTapEditorProps) => {
 	const editor = useEditor({
-		extensions: [StarterKit],
+		extensions: [
+			StarterKit.configure({
+				bulletList: false,
+				orderedList: false,
+				listItem: false,
+			}),
+			BulletList.configure({
+				HTMLAttributes: {
+					class: "list-disc ml-4",
+				},
+			}),
+			OrderedList.configure({
+				HTMLAttributes: {
+					class: "list-decimal ml-4",
+				},
+			}),
+			ListItem,
+		],
 		content: initialContent,
 		editable,
 		editorProps: {
@@ -110,7 +130,7 @@ const TipTapEditor = ({
 
 			{/* Fixed footer */}
 			{onSave && (
-				<div className="shrink-0 border-t border-input bg-background px-4 py-2 flex justify-end">
+				<div className="shrink-0 border-t border-input bg-background px-4 py-4 flex justify-end">
 					<Button onClick={() => onSave(editor.getHTML())}>Simpan</Button>
 				</div>
 			)}

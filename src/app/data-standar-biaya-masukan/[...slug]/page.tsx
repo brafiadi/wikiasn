@@ -157,7 +157,7 @@ export default async function Page({
 					{penjelasan ? (
 						<>
 							<PenjelasanSBM penjelasan={penjelasan as string} />
-							<Separator className="m-4" />
+							<Separator className="m-8" />
 						</>
 					) : null}
 					<DataSBMTableClient data={data} kategori={kategori} />
