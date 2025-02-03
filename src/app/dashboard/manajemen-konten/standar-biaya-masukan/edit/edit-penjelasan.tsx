@@ -51,7 +51,7 @@ export default function EditPenjelasan({
 					</Tooltip>
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="max-w-[1000px] w-[90vw] max-h-[90vh] flex flex-col">
+			<DialogContent className="max-w-[1000px] w-[90vw] h-[90vh] flex flex-col">
 				<DialogHeader>
 					<DialogTitle>Edit Penjelasan</DialogTitle>
 				</DialogHeader>
