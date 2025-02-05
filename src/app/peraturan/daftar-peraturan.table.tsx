@@ -48,9 +48,12 @@ export default async function DaftarPeraturanTable() {
 							<TableCell>{item.nama}</TableCell>
 							<TableCell>{item.tahun}</TableCell>
 							<TableCell>
-								{item.kata_kunci.map((kataKunci: string, index: number) => (
+								{(typeof item.kata_kunci === "string"
+									? item.kata_kunci.split(",")
+									: item.kata_kunci
+								).map((kataKunci: string) => (
 									<Badge
-										key={index}
+										key={kataKunci}
 										className="bg-red-600/50 font-extralight mr-2 mb-2 capitalize"
 									>
 										{kataKunci}
