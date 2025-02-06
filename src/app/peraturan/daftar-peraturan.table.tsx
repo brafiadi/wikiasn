@@ -24,6 +24,7 @@ interface Peraturan {
 	tahun: string;
 	tautan: string;
 	kata_kunci: string;
+	slug: string;
 }
 
 export default async function DaftarPeraturanTable() {
@@ -45,20 +46,29 @@ export default async function DaftarPeraturanTable() {
 					{data.map((item: Peraturan, index: number) => (
 						<TableRow key={item.id}>
 							<TableCell className="text-gray-500">{index + 1}</TableCell>
-							<TableCell>{item.nama}</TableCell>
+							<TableCell>
+								<Link
+									href={`peraturan/${item.slug}`}
+									className="hover:text-red-600"
+								>
+									{item.nama}
+								</Link>
+							</TableCell>
 							<TableCell>{item.tahun}</TableCell>
 							<TableCell>
-								{(typeof item.kata_kunci === "string"
-									? item.kata_kunci.split(",")
-									: item.kata_kunci
-								).map((kataKunci: string) => (
-									<Badge
-										key={kataKunci}
-										className="bg-red-600/50 font-extralight mr-2 mb-2 capitalize"
-									>
-										{kataKunci}
-									</Badge>
-								))}
+								<div className="flex flex-wrap gap-2">
+									{(typeof item.kata_kunci === "string"
+										? item.kata_kunci.split(",")
+										: item.kata_kunci
+									).map((kataKunci: string) => (
+										<Badge
+											key={kataKunci}
+											className="bg-red-600/50 font-extralight capitalize"
+										>
+											{kataKunci}
+										</Badge>
+									))}
+								</div>
 							</TableCell>
 							<TableCell>
 								<Link href={item.tautan} target="_blank">
