@@ -61,8 +61,8 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
 				<Page
 					pageNumber={currentPage}
 					scale={scale}
-					className="border shadow-lg"
 					width={800}
+					className="border shadow-lg w-full max-w-[90%] sm:max-w-[600px] lg:max-w-[800px] mx-auto"
 				/>
 			</Document>
 
