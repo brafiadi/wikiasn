@@ -1,10 +1,10 @@
 "use client";
 
 import { pdfjs, Document, Page } from "react-pdf";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
-import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+import { ScrollArea } from "./ui/scroll-area";
 import Loader from "./loader";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
@@ -22,6 +22,26 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [numPages, setNumPages] = useState(0);
 	const [scale, setScale] = useState(1.0); // Untuk zoom level
+	const [pageWidth, setPageWidth] = useState(800); // Default width untuk desktop
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 640) {
+				setPageWidth(300); // Mobile
+			} else if (window.innerWidth < 1024) {
+				setPageWidth(600); // Tablet
+			} else {
+				setPageWidth(800); // Desktop
+			}
+		};
+
+		handleResize(); // Set ukuran saat pertama kali
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 
 	const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
 		setNumPages(numPages);
@@ -61,8 +81,8 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
 				<Page
 					pageNumber={currentPage}
 					scale={scale}
-					width={800}
-					className="border shadow-lg w-full max-w-[90%] sm:max-w-[600px] lg:max-w-[800px] mx-auto"
+					width={pageWidth} // Dynamic width
+					className="border shadow-lg"
 				/>
 			</Document>
 
@@ -75,7 +95,8 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
 				>
 					<ChevronLeft />
 				</Button>
-				<span className="text-sm text-gray-700">
+				{/* Page Indicator */}
+				<div className="flex items-center space-x-2 text-sm">
 					<input
 						type="number"
 						value={currentPage}
@@ -83,9 +104,10 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
 						className="w-12 px-2 py-1 text-center border rounded"
 						min={1}
 						max={numPages}
-					/>{" "}
-					/ {numPages}
-				</span>
+					/>
+					<span className="text-gray-700">/ </span>
+					<span className="text-gray-700">{numPages}</span>
+				</div>
 				<Button
 					onClick={goToNextPage}
 					disabled={currentPage === numPages}
@@ -106,11 +128,6 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
 					<ZoomIn />
 				</Button>
 			</div>
-
-			{/* Page Info */}
-			{/* <p className="mt-4 text-sm text-gray-600"> */}
-			{/* 	Page {currentPage} of {numPages} */}
-			{/* </p> */}
 		</ScrollArea>
 	);
 }
