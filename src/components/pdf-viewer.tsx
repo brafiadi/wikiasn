@@ -83,6 +83,7 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
 					scale={scale}
 					width={pageWidth} // Dynamic width
 					className="border shadow-lg"
+					loading={<Loader />}
 				/>
 			</Document>
 
