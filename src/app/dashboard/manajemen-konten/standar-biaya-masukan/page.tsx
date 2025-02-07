@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import StandarBiayaMasukanTable from "./standar-biaya-masukan.table";
 
 export default function Page() {
