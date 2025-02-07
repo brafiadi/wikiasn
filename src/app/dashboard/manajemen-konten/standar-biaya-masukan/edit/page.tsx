@@ -3,21 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { atom, useAtom } from "jotai";
 import { useSBM } from "@/hooks/manajemen-konten/sbm";
 import SBMPenjelasanSection from "./sbm-penjelasan.section";
 import SBMDataTable from "./sbm-data.table";
-
-// const apiUrl = process.env.API_URL;
-
-// const getDetailSBMData = async (sbm: string, tahun: string) => {
-// 	const res = await fetch(
-// 		`${apiUrl}/standar-biaya-masukan/data?sbm=${sbm}&tahun=${tahun}`,
-// 	);
-// 	const data = await res.json();
-// 	return data;
-// };
 
 const tahunAtom = atom("2025");
 
