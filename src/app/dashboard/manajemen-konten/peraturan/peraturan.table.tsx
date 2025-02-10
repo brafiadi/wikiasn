@@ -21,6 +21,7 @@ interface Peraturan {
 	slug: string;
 	tahun: string;
 	tautan: string;
+	kategori: string;
 }
 
 export default function PeraturanTable() {
@@ -45,8 +46,9 @@ export default function PeraturanTable() {
 					<TableRow>
 						<TableHead className="w-[50px]">#</TableHead>
 						<TableHead>Peraturan</TableHead>
+						<TableHead className="w-[150px]">Kategori</TableHead>
 						<TableHead className="w-[150px]">Tahun</TableHead>
-						<TableHead className="w-[200px]">Kategori</TableHead>
+						<TableHead className="w-[200px]">Kata Kunci</TableHead>
 						<TableHead className="w-[200px]">Dokumen</TableHead>
 					</TableRow>
 				</TableHeader>
@@ -72,6 +74,7 @@ export default function PeraturanTable() {
 										</p>
 									</button>
 								</TableCell>
+								<TableCell className="w-[150px]">{item.kategori}</TableCell>
 								<TableCell className="w-[150px]">{item.tahun}</TableCell>
 								<TableCell className="w-[200px]">
 									<div className="flex flex-wrap gap-2">

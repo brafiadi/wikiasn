@@ -25,6 +25,7 @@ interface Peraturan {
 	tautan: string;
 	kata_kunci: string;
 	slug: string;
+	kategori: string;
 }
 
 export default async function DaftarPeraturanTable() {
@@ -37,8 +38,9 @@ export default async function DaftarPeraturanTable() {
 					<TableRow>
 						<TableHead className="w-[50px]">#</TableHead>
 						<TableHead>Judul Peraturan</TableHead>
+						<TableHead>Kategori</TableHead>
 						<TableHead>Tahun</TableHead>
-						<TableHead className="w-[200px]">Kategori</TableHead>
+						<TableHead className="w-[200px]">Kata Kunci</TableHead>
 						<TableHead>Dokumen</TableHead>
 					</TableRow>
 				</TableHeader>
@@ -54,6 +56,7 @@ export default async function DaftarPeraturanTable() {
 									{item.nama}
 								</Link>
 							</TableCell>
+							<TableCell>{item.kategori}</TableCell>
 							<TableCell>{item.tahun}</TableCell>
 							<TableCell>
 								<div className="flex flex-wrap gap-2">
