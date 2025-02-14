@@ -43,6 +43,7 @@ import slugify from "slugify";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { usePeraturan } from "@/hooks/manajemen-konten/peraturan";
 
 const kategoriEnum = [
 	"Ketetapan Majelis Permusyawaratan Rakyat",
@@ -86,6 +87,8 @@ export default function TambahPeraturan() {
 	const [open, setOpen] = useState(false);
 	const [newKeyword, setNewKeyword] = useState("");
 
+	const { mutate: addPeraturan, isPending } = usePeraturan().addPeraturan();
+
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -128,7 +131,8 @@ export default function TambahPeraturan() {
 				: null,
 		};
 
-		console.log(formattedValues);
+		// console.log(formattedValues);
+		addPeraturan(formattedValues);
 		form.reset();
 		setOpen(false);
 	};
