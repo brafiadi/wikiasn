@@ -64,7 +64,7 @@ const formSchema = z.object({
 	nama: z.string().min(1, {
 		message: "Nama peraturan wajib diisi",
 	}),
-	tautan: z.string().min(1, {
+	tautan: z.string().url({
 		message: "Tautan peraturan wajib diisi",
 	}),
 	tahun: z.string().min(4).max(4, {
@@ -93,7 +93,7 @@ export default function TambahPeraturan() {
 			tautan: "",
 			tahun: "",
 			kata_kunci: [],
-			kategori: "Peraturan Pemerintah",
+			kategori: "Undang-Undang",
 			slug: "",
 		},
 	});
@@ -120,7 +120,15 @@ export default function TambahPeraturan() {
 	}, [watch, setValue]);
 
 	const onSubmit = (values: FormValues) => {
-		console.log(values);
+		// Convert tanggal_pengesahan to ISO format
+		const formattedValues = {
+			...values,
+			tanggal_pengesahan: values.tanggal_pengesahan
+				? new Date(values.tanggal_pengesahan).toISOString()
+				: null,
+		};
+
+		console.log(formattedValues);
 		form.reset();
 		setOpen(false);
 	};
