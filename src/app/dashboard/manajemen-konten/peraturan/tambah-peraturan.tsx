@@ -123,15 +123,18 @@ export default function TambahPeraturan() {
 	}, [watch, setValue]);
 
 	const onSubmit = (values: FormValues) => {
-		// Convert tanggal_pengesahan to ISO format
+		// Ensure tanggal_pengesahan is a Date object
+		if (!values.tanggal_pengesahan) {
+			alert("Tanggal pengesahan wajib diisi");
+			return;
+		}
+
 		const formattedValues = {
 			...values,
-			tanggal_pengesahan: values.tanggal_pengesahan
-				? new Date(values.tanggal_pengesahan).toISOString()
-				: null,
+			tanggal_pengesahan: new Date(values.tanggal_pengesahan),
+			slug: values.slug || "",
 		};
 
-		// console.log(formattedValues);
 		addPeraturan(formattedValues);
 		form.reset();
 		setOpen(false);
