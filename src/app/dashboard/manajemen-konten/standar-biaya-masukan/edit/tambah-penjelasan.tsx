@@ -61,7 +61,7 @@ export default function TambahPenjelasan({
 			penjelasan: values.penjelasan,
 		};
 		addPenjelasan(data);
-		console.log("save", data);
+		// console.log("save", data);
 		form.reset();
 		setOpen(false);
 	}

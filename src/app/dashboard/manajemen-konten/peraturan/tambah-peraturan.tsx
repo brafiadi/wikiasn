@@ -43,6 +43,7 @@ import slugify from "slugify";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { usePeraturan } from "@/hooks/manajemen-konten/peraturan";
 
 const kategoriEnum = [
 	"Ketetapan Majelis Permusyawaratan Rakyat",
@@ -64,7 +65,7 @@ const formSchema = z.object({
 	nama: z.string().min(1, {
 		message: "Nama peraturan wajib diisi",
 	}),
-	tautan: z.string().min(1, {
+	tautan: z.string().url({
 		message: "Tautan peraturan wajib diisi",
 	}),
 	tahun: z.string().min(4).max(4, {
@@ -86,6 +87,8 @@ export default function TambahPeraturan() {
 	const [open, setOpen] = useState(false);
 	const [newKeyword, setNewKeyword] = useState("");
 
+	const { mutate: addPeraturan, isPending } = usePeraturan().addPeraturan();
+
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -93,7 +96,7 @@ export default function TambahPeraturan() {
 			tautan: "",
 			tahun: "",
 			kata_kunci: [],
-			kategori: "Peraturan Pemerintah",
+			kategori: "Undang-Undang",
 			slug: "",
 		},
 	});
@@ -120,7 +123,19 @@ export default function TambahPeraturan() {
 	}, [watch, setValue]);
 
 	const onSubmit = (values: FormValues) => {
-		console.log(values);
+		// Ensure tanggal_pengesahan is a Date object
+		if (!values.tanggal_pengesahan) {
+			alert("Tanggal pengesahan wajib diisi");
+			return;
+		}
+
+		const formattedValues = {
+			...values,
+			tanggal_pengesahan: new Date(values.tanggal_pengesahan),
+			slug: values.slug || "",
+		};
+
+		addPeraturan(formattedValues);
 		form.reset();
 		setOpen(false);
 	};
