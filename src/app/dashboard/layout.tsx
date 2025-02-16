@@ -20,6 +20,7 @@ import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
 	title: "Dashboard Kontributor - WikiASN",
@@ -54,6 +55,7 @@ export default async function Layout({
 						<div className="flex flex-1 flex-col gap-4 p-4 pt-0">
 							<div className="min-h-[100vh] flex-1 rounded-xl md:min-h-min text-neutral-700">
 								<ScrollArea className="h-[88vh]">{children}</ScrollArea>
+								<Toaster />
 							</div>
 						</div>
 					</SidebarInset>

@@ -5,6 +5,7 @@ import TambahPenjelasan from "./tambah-penjelasan";
 import EditPenjelasan from "./edit-penjelasan";
 import TipTapEditor from "@/components/tiptap-editor";
 import { ContentView } from "@/components/content-view";
+import { Toaster } from "@/components/ui/toaster";
 
 interface SBMPenjelasanSectionProps {
 	tahun: string;
