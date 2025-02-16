@@ -62,6 +62,7 @@ export const useSBM = () => {
 			mutationFn: (payload: UpdatePenjelasanPayload) =>
 				sbmApi.updatePenjelasan(id, payload),
 			onSuccess: () => {
+				// console.log("sukses");
 				toast({
 					title: "Sukses",
 					description: "Data penjelasan berhasil diperbarui",
