@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
 
 		return config;
 	},
+	// Enable Turbopack
+	turbopack: {},
 };
 
 export default nextConfig;

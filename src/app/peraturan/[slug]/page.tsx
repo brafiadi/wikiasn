@@ -17,7 +17,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
 	params,
-}: { params: Promise<{ slug: string }> }) {
+}: {
+	params: Promise<{ slug: string }>;
+}) {
 	const slug = (await params).slug;
 	const apiUrl = process.env.API_URL;
 	const res = await fetch(`${apiUrl}/peraturan/data?link=${slug}`);
@@ -30,7 +32,9 @@ export async function generateMetadata({
 
 export default async function Page({
 	params,
-}: { params: Promise<{ slug: string }> }) {
+}: {
+	params: Promise<{ slug: string }>;
+}) {
 	const slug = (await params).slug;
 	const apiUrl = process.env.API_URL;
 	const res = await fetch(`${apiUrl}/peraturan/data?link=${slug}`);

@@ -8,7 +8,9 @@ interface SearchResult {
 
 export default function SearchResults({
 	results,
-}: { results: SearchResult[] }) {
+}: {
+	results: SearchResult[];
+}) {
 	if (results.length === 0) {
 		return <p className="text-center text-gray-500">No results found.</p>;
 	}

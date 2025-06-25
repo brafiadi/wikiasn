@@ -28,7 +28,9 @@ export const metadata: Metadata = {
 
 export default async function Layout({
 	children,
-}: { children: React.ReactNode }) {
+}: {
+	children: React.ReactNode;
+}) {
 	const session = await auth();
 
 	const email = session?.user?.email;
